@@ -1,0 +1,21 @@
+{
+  "navbar": {
+    "home": "Home",
+    "docs": "Docs",
+    "download": "Download",
+    "community": "Community",
+    "support": "Support",
+    "blog": "Blog"
+  },
+  "landing": {
+    "title": "RustCost — Lightweight FinOps for Kubernetes",
+    "subtitle": "Monitor, optimize, and understand your cluster costs."
+  },
+  "footer": {
+    "copyright": "Open FinOps for Kubernetes"
+  },
+  "docs": {
+    "title": "Documentation",
+    "install": "Installation Guide"
+  }
+}

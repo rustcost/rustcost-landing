@@ -1,0 +1,21 @@
+{
+  "navbar": {
+    "home": "홈",
+    "docs": "문서",
+    "download": "다운로드",
+    "community": "커뮤니티",
+    "support": "지원",
+    "blog": "블로그"
+  },
+  "landing": {
+    "title": "RustCost — 쿠버네티스를 위한 가벼운 FinOps 솔루션",
+    "subtitle": "클러스터 비용을 모니터링하고 최적화하세요."
+  },
+  "footer": {
+    "copyright": "쿠버네티스를 위한 오픈 FinOps"
+  },
+  "docs": {
+    "title": "문서",
+    "install": "설치 가이드"
+  }
+}
