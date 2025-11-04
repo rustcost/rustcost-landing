@@ -1,3 +1,9 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  body {
+    /* Primary page background: #F3F4F6 (Tailwind gray-100) */
+    @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+  }
+}

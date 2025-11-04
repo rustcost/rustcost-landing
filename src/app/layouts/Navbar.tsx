@@ -37,7 +37,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/80 backdrop-blur shadow-md">
+    <header className="sticky top-0 z-50 bg-gray-50/90 dark:bg-gray-900/80 backdrop-blur shadow-md">
       <div className="container mx-auto flex justify-between items-center px-4 md:px-6 py-3">
         {/* Brand */}
         <div className="flex items-center gap-3">

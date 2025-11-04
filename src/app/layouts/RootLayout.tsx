@@ -13,13 +13,13 @@ export default function RootLayout() {
     }
   }, [lng]);
 
-  const showTopBar = import.meta.env.VITE_APP_ENV === "PROD";
+  const showTopBar = import.meta.env.VITE_APP_ENV !== "PROD";
 
   return (
     <div className="flex flex-col min-h-screen">
       {showTopBar && <TopBar />}
       <Navbar />
-      <main className="grow container mx-auto p-6">
+      <main className="grow container mx-auto px-4 md:px-6 py-8">
         <Outlet />
       </main>
       <footer className="bg-gray-100 dark:bg-gray-800 text-gray-500 text-center py-4 text-sm">
