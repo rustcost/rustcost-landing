@@ -8,8 +8,46 @@
     "blog": "블로그"
   },
   "landing": {
-    "title": "RustCost — 쿠버네티스를 위한 가벼운 FinOps 솔루션",
-    "subtitle": "클러스터 비용을 모니터링하고 최적화하세요."
+    "title": "RustCost — 쿠버네티스를 위한 가벼운 FinOps",
+    "subtitle": "클러스터 비용을 모니터링하고 최적화하며 이해하세요.",
+    "hero": {
+      "title": "조용하지만 충분한 FinOps 관측성",
+      "subtitle": "무거운 FinOps 플랫폼이 아니라, 쿠버네티스 비용을 이해하고 개선하기 위한 가벼운 투명한 도구입니다."
+    },
+    "cta": {
+      "getStarted": "시작하기",
+      "viewOnGitHub": "GitHub에서 보기",
+      "headline": "비용을 이해하고 개선하세요",
+      "sub": "Helm으로 설치하고 몇 분 안에 비용 인사이트를 얻으세요.",
+      "star": "GitHub 스타"
+    },
+    "features": {
+      "title": "주요 기능",
+      "performance": {
+        "title": "가벼운 성능",
+        "desc": "Rust와 Simple Layer 기반으로 제어와 속도를 제공합니다."
+      },
+      "reactivity": {
+        "title": "세밀한 반응성",
+        "desc": "중요한 부분만 업데이트하여 빠른 사용자 경험을 제공합니다."
+      },
+      "typechecked": {
+        "title": "타입 체크된 UI",
+        "desc": "타입 기반 스택으로 빌드 타임에 오류를 잡습니다."
+      },
+      "ssr": {
+        "title": "서버 사이드 렌더링(SSR)",
+        "desc": "필요할 때 SEO 친화적이고 빠릅니다."
+      },
+      "async": {
+        "title": "비동기와 서스펜스",
+        "desc": "데이터와 차트를 위한 일급 비동기 흐름을 제공합니다."
+      },
+      "routing": {
+        "title": "내장 라우팅",
+        "desc": "클라이언트와 서버 내비게이션이 자연스럽게 동작합니다."
+      }
+    }
   },
   "footer": {
     "copyright": "쿠버네티스를 위한 오픈 FinOps"

@@ -13,11 +13,14 @@ export default function RootLayout() {
     }
   }, [lng]);
 
+  const showTopBar =
+    import.meta.env.DEV || import.meta.env.VITE_SHOW_TOPBAR === "true";
+
   return (
     <div className="flex flex-col min-h-screen">
-      <TopBar />
+      {showTopBar && <TopBar />}
       <Navbar />
-      <main className="flex-grow container mx-auto p-6">
+      <main className="grow container mx-auto p-6">
         <Outlet />
       </main>
       <footer className="bg-gray-100 dark:bg-gray-800 text-gray-500 text-center py-4 text-sm">

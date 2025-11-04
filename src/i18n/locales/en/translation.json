@@ -9,7 +9,45 @@
   },
   "landing": {
     "title": "RustCost — Lightweight FinOps for Kubernetes",
-    "subtitle": "Monitor, optimize, and understand your cluster costs."
+    "subtitle": "Monitor, optimize, and understand your cluster costs.",
+    "hero": {
+      "title": "Quiet but Sufficient FinOps Observability",
+      "subtitle": "A lightweight, transparent way to understand and improve Kubernetes costs — not another heavy FinOps platform."
+    },
+    "cta": {
+      "getStarted": "Get Started",
+      "viewOnGitHub": "View on GitHub",
+      "headline": "Understand and improve your costs",
+      "sub": "Install with Helm and get cost awareness in minutes.",
+      "star": "Star on GitHub"
+    },
+    "features": {
+      "title": "Features",
+      "performance": {
+        "title": "Effortless Performance",
+        "desc": "Rust + Simple Layer roots for control and speed."
+      },
+      "reactivity": {
+        "title": "Fine‑Grained Reactivity",
+        "desc": "Update only what matters for responsive UX."
+      },
+      "typechecked": {
+        "title": "Type‑checked UI",
+        "desc": "Catch issues at build time with a typed stack."
+      },
+      "ssr": {
+        "title": "Server Side Rendering (SSR)",
+        "desc": "SEO‑friendly and fast when you need it."
+      },
+      "async": {
+        "title": "Async and Suspense",
+        "desc": "First‑class async flows for data and charts."
+      },
+      "routing": {
+        "title": "Built‑in Routing",
+        "desc": "Client and server navigation that just works."
+      }
+    }
   },
   "footer": {
     "copyright": "Open FinOps for Kubernetes"
