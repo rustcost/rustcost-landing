@@ -7,6 +7,10 @@
     "support": "Support",
     "blog": "Blog"
   },
+  "blog": {
+    "title": "RustCost Blog",
+    "subtitle": "News and articles from the RustCost team (API integration coming soon)."
+  },
   "landing": {
     "title": "RustCost — Lightweight FinOps for Kubernetes",
     "subtitle": "Monitor, optimize, and understand your cluster costs.",
@@ -52,8 +56,43 @@
   "footer": {
     "copyright": "Open FinOps for Kubernetes"
   },
+  "support": {
+    "title": "Support",
+    "subtitle": "Partners and companies supporting RustCost."
+  },
   "docs": {
     "title": "Documentation",
     "install": "Installation Guide"
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Join discussions, share ideas, and help shape RustCost.",
+    "contribute": {
+      "title": "How to contribute",
+      "body": "Read our contribution guide and send PRs for code, docs, or design.",
+      "cta": "Open Contribution Guide"
+    },
+    "cloudbro": {
+      "title": "CloudBro AI",
+      "desc": "Community posts, discussions, and announcements."
+    },
+    "posts": {
+      "ko1": "Korean Post about RustCost info",
+      "ko2": "Korean Post about RustCost project (Rust + FinOps)"
+    },
+    "feed": {
+      "placeholder": "Community feed and events will appear here (API integration coming soon)."
+    },
+    "blog": {
+      "title": "Blog",
+      "desc": "News and articles from the RustCost team (API integration coming soon).",
+      "cta": "Open Blog"
+    },
+    "supporters": {
+      "title": "Supporters",
+      "add": "Add your company",
+      "applyLink": "https://github.com/rustcost/rustcost/issues/new?title=Supporter%20Application&labels=sponsor",
+      "note": "Thanks to our supporters. Display order is alphabetical unless sponsored."
+    }
   }
 }
