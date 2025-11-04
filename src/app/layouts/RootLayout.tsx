@@ -13,8 +13,7 @@ export default function RootLayout() {
     }
   }, [lng]);
 
-  const showTopBar =
-    import.meta.env.DEV || import.meta.env.VITE_SHOW_TOPBAR === "true";
+  const showTopBar = import.meta.env.VITE_APP_ENV === "PROD";
 
   return (
     <div className="flex flex-col min-h-screen">
