@@ -10,7 +10,9 @@ function CopyButton({ text }: { text: string }) {
           await navigator.clipboard.writeText(text);
           setCopied(true);
           setTimeout(() => setCopied(false), 1200);
-        } catch {}
+        } catch {
+          // ignore
+        }
       }}
       className="rounded-md border border-gray-300 bg-white/80 px-2 py-1 text-xs text-gray-700 hover:bg-white dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200"
     >
@@ -29,9 +31,9 @@ helm repo update
 helm upgrade --install rustcost rustcost/rustcost -n rustcost --create-namespace`;
 
   const coreImage = "kimc1992/rustcost";
-  const feImage = "kimc1992/rustcost-frontend";
+  const feImage = "kimc1992/rustcost-dashboard";
   const coreRepo = "https://github.com/rustcost/rustcost";
-  const feRepo = "https://github.com/rustcost/rustcost-frontend";
+  const feRepo = "https://github.com/rustcost/rustcost-dashboard";
 
   type Ver = { version: string; date: string; badge?: "LATEST" | "LTS"; notes?: string };
   const coreVersions: Ver[] = [
@@ -120,7 +122,7 @@ kubectl get pvc -n rustcost
                   Core backend: <a className="text-blue-600 underline dark:text-amber-400" href={`https://hub.docker.com/r/${coreImage}`} target="_blank" rel="noreferrer">{coreImage}</a>
                 </li>
                 <li>
-                  Frontend: <a className="text-blue-600 underline dark:text-amber-400" href={`https://hub.docker.com/r/${feImage}`} target="_blank" rel="noreferrer">{feImage}</a>
+                  Dashboard: <a className="text-blue-600 underline dark:text-amber-400" href={`https://hub.docker.com/r/${feImage}`} target="_blank" rel="noreferrer">{feImage}</a>
                 </li>
               </ul>
             </div>
@@ -139,9 +141,9 @@ services:
     volumes:
       - rustcost-data:/data  # must be SSD-backed in production
 
-  rustcost-frontend:
+  rustcost-dashboard:
     image: {feImage}
-    container_name: rustcost-frontend
+    container_name: rustcost-dashboard
     restart: unless-stopped
     ports:
       - "8080:80"
@@ -208,7 +210,7 @@ subjects:
           Images are multi-arch and designed for Kubernetes. OS/Architecture selection is not required; tags are shown for visibility.
         </p>
 
-        {[{ title: "RustCost Core", image: coreImage, repo: coreRepo, versions: coreVersions }, { title: "RustCost Frontend", image: feImage, repo: feRepo, versions: feVersions }].map(
+        {[{ title: "RustCost Core", image: coreImage, repo: coreRepo, versions: coreVersions }, { title: "RustCost Dashboard", image: feImage, repo: feRepo, versions: feVersions }].map(
           (section) => (
             <div key={section.title} className="rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
               <div className="border-b border-gray-100 px-4 py-3 dark:border-gray-800">

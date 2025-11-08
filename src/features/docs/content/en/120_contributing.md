@@ -10,7 +10,7 @@ Thank you for contributing to RustCost! This guide explains how to get started, 
 |-------------|--------------|---------------|
 | **rustcost-core** | Core services: API, Collector, Processor | Rust |
 | **rustcost-hub** | Multi-node coordination and orchestration | Rust |
-| **rustcost-dashboard** | Dashboards, visualization, frontend UI | TypeScript / React |
+| **rustcost-dashboard** | Dashboards, visualization, dashboard UI | TypeScript / React |
 | **rustcost-site** | Documentation and marketing website | TypeScript / Vite + React |
 | **rustcost-helmchart** | Helm deployment configurations | YAML |
 | **.github** | Org-wide workflows, issue templates, actions, profiles | YAML / Markdown |
@@ -99,7 +99,7 @@ helm lint ./charts/rustcost
 Each repository has its own README with setup instructions. Common dependencies:
 
 - Rust toolchain (via `rustup`)
-- Node.js (for frontend / docs)
+- Node.js (for dashboard / docs)
 - Docker & Kubernetes (for local cluster testing)
 - Helm (for deployment)
 
