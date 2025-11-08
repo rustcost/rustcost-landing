@@ -2,13 +2,9 @@
 import { NavLink, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import {
-  Bars3Icon,
-  GlobeAltIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, GlobeAltIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeToggle from "@/shared/components/ThemeToggle";
-import logo from "/logo.webp";
+import BrandLogo from "@/shared/components/BrandLogo";
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -41,11 +37,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-4 md:px-6 py-3">
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <img
-            src={logo}
-            alt="RustCost"
-            className="h-12 w-12 rounded-full shadow-sm"
-          />
+          <BrandLogo className="h-12 w-12 rounded-full shadow-sm" />
           <span className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
             RustCost
           </span>
@@ -107,11 +99,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[60] bg-white dark:bg-gray-950">
           <div className="container mx-auto px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img
-                src={logo}
-                alt="RustCost"
-                className="h-12 w-12 rounded-full"
-              />
+              <BrandLogo className="h-12 w-12 rounded-full" />
               <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
                 RustCost
               </span>

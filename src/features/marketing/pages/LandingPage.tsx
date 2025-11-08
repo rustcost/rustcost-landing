@@ -11,6 +11,7 @@ import {
   ClockIcon,
   MapIcon,
 } from "@heroicons/react/24/outline";
+import BrandLogo from "@/shared/components/BrandLogo";
 
 export default function LandingPage() {
   const { lng } = useParams();
@@ -84,11 +85,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-5xl text-center">
             {/* Big logo + brand */}
             <div className="mb-6 flex flex-col items-center justify-center gap-5">
-              <img
-                src="/logo.webp"
-                alt="RustCost Logo"
-                className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow"
-              />
+              <BrandLogo className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow" />
               <span className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
                 RustCost
               </span>
