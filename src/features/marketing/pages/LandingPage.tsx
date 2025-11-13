@@ -86,9 +86,6 @@ export default function LandingPage() {
             {/* Big logo + brand */}
             <div className="mb-6 flex flex-col items-center justify-center gap-5">
               <BrandLogo className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow" />
-              <span className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
-                RustCost
-              </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               {t("landing.hero.title", {
