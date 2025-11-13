@@ -27,29 +27,21 @@
     },
     "features": {
       "title": "Features",
-      "performance": {
-        "title": "Effortless Performance",
-        "desc": "Rust + Simple Layer roots for control and speed."
+      "analytics": {
+        "title": "Kubernetes Cost Analysis",
+        "desc": "RustCost provides intuitive insights into Kubernetes cluster resource usage and costs. You can track expenses in detail at the Pod, Namespace, and Node levels."
       },
-      "reactivity": {
-        "title": "Fine‑Grained Reactivity",
-        "desc": "Update only what matters for responsive UX."
+      "lightweight": {
+        "title": "Lightweight Rust Architecture",
+        "desc": "Built with Rust, RustCost consumes minimal memory and delivers high execution speed. It runs efficiently even in cloud environments with limited resources."
       },
-      "typechecked": {
-        "title": "Type‑checked UI",
-        "desc": "Catch issues at build time with a typed stack."
+      "collector": {
+        "title": "Efficient Collection Algorithm",
+        "desc": "Powered by optimized Rust-based algorithms, RustCost minimizes CPU usage during metric collection. It maintains stable performance with low overhead, even in large-scale clusters."
       },
-      "ssr": {
-        "title": "Server Side Rendering (SSR)",
-        "desc": "SEO‑friendly and fast when you need it."
-      },
-      "async": {
-        "title": "Async and Suspense",
-        "desc": "First‑class async flows for data and charts."
-      },
-      "routing": {
-        "title": "Built‑in Routing",
-        "desc": "Client and server navigation that just works."
+      "neutrality": {
+        "title": "Vendor Neutral",
+        "desc": "RustCost is designed to be vendor-agnostic. It will support consistent cost analysis across AWS, GCP, Azure, and on-premise environments."
       }
     }
   },
