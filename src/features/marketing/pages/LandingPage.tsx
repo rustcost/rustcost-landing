@@ -4,12 +4,10 @@ import {
   ArrowRightIcon,
   CheckCircleIcon,
   RocketLaunchIcon,
-  BoltIcon,
-  ArrowsRightLeftIcon,
-  FlagIcon,
-  ServerStackIcon,
-  ClockIcon,
-  MapIcon,
+  ArrowTrendingUpIcon,
+  SparklesIcon,
+  CpuChipIcon,
+  GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import BrandLogo from "@/shared/components/BrandLogo";
 
@@ -20,57 +18,43 @@ export default function LandingPage() {
 
   const featureCards = [
     {
-      Icon: BoltIcon,
-      title: t("landing.features.performance.title", {
-        defaultValue: "Effortless Performance",
+      Icon: ArrowTrendingUpIcon,
+      title: t("landing.features.analytics.title", {
+        defaultValue: "Kubernetes Cost Analysis",
       }),
-      desc: t("landing.features.performance.desc", {
-        defaultValue: "Rust  + Simple Layer for control and speed.",
-      }),
-    },
-    {
-      Icon: ArrowsRightLeftIcon,
-      title: t("landing.features.reactivity.title", {
-        defaultValue: "Fine‑Grained Reactivity",
-      }),
-      desc: t("landing.features.reactivity.desc", {
-        defaultValue: "Update only what matters for responsive UX.",
+      desc: t("landing.features.analytics.desc", {
+        defaultValue:
+          "RustCost provides intuitive insights into Kubernetes cluster resource usage and costs. You can track expenses in detail at the Pod, Namespace, and Node levels.",
       }),
     },
     {
-      Icon: FlagIcon,
-      title: t("landing.features.typechecked.title", {
-        defaultValue: "Type‑checked UI",
+      Icon: SparklesIcon,
+      title: t("landing.features.lightweight.title", {
+        defaultValue: "Lightweight Rust Architecture",
       }),
-      desc: t("landing.features.typechecked.desc", {
-        defaultValue: "Catch issues at build time with a typed stack.",
-      }),
-    },
-    {
-      Icon: ServerStackIcon,
-      title: t("landing.features.ssr.title", {
-        defaultValue: "Server Side Rendering (SSR)",
-      }),
-      desc: t("landing.features.ssr.desc", {
-        defaultValue: "SEO‑friendly and fast when you need it.",
+      desc: t("landing.features.lightweight.desc", {
+        defaultValue:
+          "Built with Rust, RustCost consumes minimal memory and delivers high execution speed. It runs efficiently even in cloud environments with limited resources.",
       }),
     },
     {
-      Icon: ClockIcon,
-      title: t("landing.features.async.title", {
-        defaultValue: "Async and Suspense",
+      Icon: CpuChipIcon,
+      title: t("landing.features.collector.title", {
+        defaultValue: "Efficient Collection Algorithm",
       }),
-      desc: t("landing.features.async.desc", {
-        defaultValue: "First‑class async flows for data and charts.",
+      desc: t("landing.features.collector.desc", {
+        defaultValue:
+          "Powered by optimized Rust-based algorithms, RustCost minimizes CPU usage during metric collection. It maintains stable performance with low overhead, even in large-scale clusters.",
       }),
     },
     {
-      Icon: MapIcon,
-      title: t("landing.features.routing.title", {
-        defaultValue: "Built‑in Routing",
+      Icon: GlobeAltIcon,
+      title: t("landing.features.neutrality.title", {
+        defaultValue: "Vendor Neutral",
       }),
-      desc: t("landing.features.routing.desc", {
-        defaultValue: "Client and server navigation that just works.",
+      desc: t("landing.features.neutrality.desc", {
+        defaultValue:
+          "RustCost is designed to be vendor-agnostic. It will support consistent cost analysis across AWS, GCP, Azure, and on-premise environments.",
       }),
     },
   ];
@@ -86,6 +70,9 @@ export default function LandingPage() {
             {/* Big logo + brand */}
             <div className="mb-6 flex flex-col items-center justify-center gap-5">
               <BrandLogo className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow" />
+              <span className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
+                RustCost
+              </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               {t("landing.hero.title", {
@@ -137,7 +124,7 @@ export default function LandingPage() {
         <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
           {t("landing.features.title", { defaultValue: "Features" })}
         </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featureCards.map(({ Icon, title, desc }) => (
             <div
               key={String(title)}
@@ -230,7 +217,7 @@ export default function LandingPage() {
 
       {/* Architecture */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
-        <div className="rounded-2xl bg-gradient-to-br from-gray-50 to-white p-6 shadow-sm ring-1 ring-gray-200 dark:from-gray-900 dark:to-gray-950 dark:ring-gray-800">
+        <div className="rounded-2xl bg-linear-to-br from-gray-50 to-white p-6 shadow-sm ring-1 ring-gray-200 dark:from-gray-900 dark:to-gray-950 dark:ring-gray-800">
           <div className="flex items-center gap-2">
             <RocketLaunchIcon className="h-6 w-6 text-amber-500" />
             <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
