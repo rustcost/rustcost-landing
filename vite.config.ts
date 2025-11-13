@@ -10,4 +10,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/docker-hub": {
+        target: "https://hub.docker.com",
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/docker-hub/, ""),
+      },
+    },
+  },
 });
