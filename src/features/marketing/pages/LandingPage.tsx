@@ -265,38 +265,40 @@ export default function LandingPage() {
 
       {/* CTA */}
       <section className="container mx-auto px-4 md:px-6 pb-16 md:pb-24">
-        <div className="mx-auto max-w-3xl rounded-2xl bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white">
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h3 className="text-2xl font-extrabold">
-                {t("landing.cta.headline", {
-                  defaultValue: "Understand and improve your costs",
-                })}
-              </h3>
-              <p className="text-gray-300 dark:text-gray-300">
-                {t("landing.cta.sub", {
-                  defaultValue:
-                    "Install with Helm and get cost awareness in minutes.",
-                })}
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <a
-                href={`${prefix}/docs`}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-gray-900 shadow hover:bg-gray-100 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
-              >
+        <div className="flex flex-col mx-auto max-w-4xl rounded-2xl justify-center bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white gap-3">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <h3 className="text-2xl font-extrabold">
+              {t("landing.cta.headline", {
+                defaultValue: "Understand and improve your costs",
+              })}
+            </h3>
+            <p className="text-gray-300 dark:text-gray-300">
+              {t("landing.cta.sub", {
+                defaultValue:
+                  "Install with Helm and get cost awareness in minutes.",
+              })}
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+            <a
+              href={`${prefix}/docs`}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-gray-900 shadow hover:bg-gray-100 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
+            >
+              <span className="leading-tight">
                 {t("landing.cta.getStarted", { defaultValue: "Get Started" })}
-                <ArrowRightIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/rustcost/rustcost"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-white hover:bg-white/10 dark:border-white/30 dark:hover:bg-white/10"
-              >
+              </span>
+              <ArrowRightIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/rustcost/rustcost"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-4 py-2 text-white hover:bg-white/10 dark:border-white/30 dark:hover:bg-white/10"
+            >
+              <span className="leading-tight">
                 {t("landing.cta.star", { defaultValue: "Star on GitHub" })}
-              </a>
-            </div>
+              </span>
+            </a>
           </div>
         </div>
       </section>
