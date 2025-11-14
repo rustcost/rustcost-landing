@@ -143,7 +143,7 @@ export default function LandingPage() {
             description="Make team or service resource consumption transparent to build real cost awareness."
             descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
           >
-            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300 flex flex-col">
               <li className="inline-flex items-center gap-2">
                 <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Cluster
                 / team breakdown
@@ -160,7 +160,7 @@ export default function LandingPage() {
             description="Attribute real cost when needed to encourage responsibility and better decisions."
             descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
           >
-            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300 flex flex-col">
               <li className="inline-flex items-center gap-2">
                 <CheckCircleIcon className="h-5 w-5 text-emerald-500" />{" "}
                 Accurate, efficient attribution
@@ -188,15 +188,8 @@ export default function LandingPage() {
             "Accuracy — neither excessive nor lax",
             "Sustainability — minimal load on systems",
             "Clarity — concise, actionable insights",
-          ].map((txt) => (
-            <div
-              key={txt}
-              className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              <p className="font-semibold text-gray-900 dark:text-white">
-                {txt}
-              </p>
-            </div>
+          ].map((text) => (
+            <Card key={text} title={text} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
@@ -240,13 +233,8 @@ export default function LandingPage() {
             "Run FinOps experiments and improve awareness",
             "Operate at scale with clear cost ownership",
             "Democratize FinOps with a simple, trusted tool",
-          ].map((item) => (
-            <div
-              key={item}
-              className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              {item}
-            </div>
+          ].map((text) => (
+            <Card key={text} title={text} titleClassName={"text-base"} />
           ))}
         </div>
       </section>

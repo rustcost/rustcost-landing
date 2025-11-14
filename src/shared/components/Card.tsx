@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 type IconComponent = ElementType<{ className?: string }>;
 
@@ -23,7 +24,7 @@ const baseTitleClasses = "text-lg font-bold text-gray-900 dark:text-white";
 const baseDescriptionClasses = "mt-1 text-sm text-gray-600 dark:text-gray-300";
 
 const mergeClasses = (...classes: Array<string | undefined>) =>
-  classes.filter(Boolean).join(" ");
+  twMerge(classes.filter(Boolean).join(" "));
 
 export default function Card({
   title,
@@ -46,7 +47,9 @@ export default function Card({
         </div>
       ) : null}
 
-      <h3 className={mergeClasses(baseTitleClasses, titleClassName)}>{title}</h3>
+      <h3 className={mergeClasses(baseTitleClasses, titleClassName)}>
+        {title}
+      </h3>
 
       {description ? (
         <p
