@@ -10,6 +10,7 @@ import {
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import BrandLogo from "@/shared/components/BrandLogo";
+import Card from "@/shared/components/Card";
 
 export default function LandingPage() {
   const { lng } = useParams();
@@ -70,9 +71,6 @@ export default function LandingPage() {
             {/* Big logo + brand */}
             <div className="mb-6 flex flex-col items-center justify-center gap-5">
               <BrandLogo className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow" />
-              <span className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
-                RustCost
-              </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               {t("landing.hero.title", {
@@ -126,20 +124,12 @@ export default function LandingPage() {
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featureCards.map(({ Icon, title, desc }) => (
-            <div
+            <Card
               key={String(title)}
-              className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              <div className="mb-4 inline-flex rounded-xl bg-amber-500/15 p-3 text-amber-600 dark:text-amber-400">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                {title}
-              </h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                {desc}
-              </p>
-            </div>
+              icon={Icon}
+              title={title}
+              description={desc}
+            />
           ))}
         </div>
       </section>
@@ -147,14 +137,12 @@ export default function LandingPage() {
       {/* Value — Showback & Chargeback */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-              Showback
-            </h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Make team or service resource consumption transparent to build
-              real cost awareness.
-            </p>
+          <Card
+            title="Showback"
+            titleClassName="text-xl font-bold text-gray-900 dark:text-white"
+            description="Make team or service resource consumption transparent to build real cost awareness."
+            descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
+          >
             <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
               <li className="inline-flex items-center gap-2">
                 <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Cluster
@@ -165,15 +153,13 @@ export default function LandingPage() {
                 trend intuition
               </li>
             </ul>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-              Chargeback
-            </h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Attribute real cost when needed to encourage responsibility and
-              better decisions.
-            </p>
+          </Card>
+          <Card
+            title="Chargeback"
+            titleClassName="text-xl font-bold text-gray-900 dark:text-white"
+            description="Attribute real cost when needed to encourage responsibility and better decisions."
+            descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
+          >
             <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
               <li className="inline-flex items-center gap-2">
                 <CheckCircleIcon className="h-5 w-5 text-emerald-500" />{" "}
@@ -184,7 +170,7 @@ export default function LandingPage() {
                 with existing stacks
               </li>
             </ul>
-          </div>
+          </Card>
         </div>
       </section>
 
