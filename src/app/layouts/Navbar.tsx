@@ -2,7 +2,11 @@
 import { NavLink, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { Bars3Icon, GlobeAltIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  GlobeAltIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import ThemeToggle from "@/shared/components/ThemeToggle";
 import BrandLogo from "@/shared/components/BrandLogo";
 
@@ -34,7 +38,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-gray-50/90 dark:bg-gray-900/80 backdrop-blur shadow-md">
-      <div className="container mx-auto flex justify-between items-center px-4 md:px-6 py-3">
+      <div className="container mx-auto flex justify-between items-center px-4 lg:px-6 py-3">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <BrandLogo className="h-12 w-12 rounded-full shadow-sm" />
@@ -44,7 +48,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex gap-4 lg:gap-6 text-gray-700 dark:text-gray-300">
+        <nav className="hidden lg:flex gap-4 lg:gap-6 text-gray-700 dark:text-gray-300">
           <NavLink to={`${prefix}/`} end className={navLinkClass}>
             {t("navbar.home")}
           </NavLink>
@@ -66,7 +70,7 @@ export default function Navbar() {
         </nav>
 
         {/* Desktop actions */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <ThemeToggle />
           {/* Language Toggle */}
           <div className="relative">
@@ -86,7 +90,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
+          className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
           aria-label="Open menu"
           onClick={() => setOpen(true)}
         >
