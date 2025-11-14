@@ -60,10 +60,26 @@ export default function LandingPage() {
     },
   ];
 
+  const showbackItems = t("landing.costing.showback.items", {
+    returnObjects: true,
+  }) as string[];
+  const chargeackItems = t("landing.costing.chargeback.items", {
+    returnObjects: true,
+  }) as string[];
+  const philosophyItems = t("landing.philosophy.items", {
+    returnObjects: true,
+  }) as string[];
+  const architectureItems = t("landing.architecture.items", {
+    returnObjects: true,
+  }) as string[];
+  const whyRustCostItems = t("landing.whyRustCost.items", {
+    returnObjects: true,
+  }) as string[];
+
   return (
     <div className="relative">
-      {/* Hero */}
-      <section className="relative overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden min-h-[calc(100vh-70px)] flex items-center">
         {/* Adjusted overlay: darker neutral gradient for light mode */}
         <div className="pointer-events-none absolute inset-0 " />
         <div className="container mx-auto px-4 md:px-6 py-16 md:py-1 relative z-10">
@@ -117,7 +133,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features: card grid */}
+      {/* Features Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
           {t("landing.features.title", { defaultValue: "Features" })}
@@ -134,115 +150,128 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Value — Showback & Chargeback */}
+      {/* Costing Section : Showback & Chargeback */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
+        <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+          {t("landing.costing.title", {
+            defaultValue: "Costing",
+          })}
+        </h2>
         <div className="grid gap-6 md:grid-cols-2">
           <Card
-            title="Showback"
+            title={t("landing.costing.showback.title", {
+              defaultValue: "Showback",
+            })}
             titleClassName="text-xl font-bold text-gray-900 dark:text-white"
-            description="Make team or service resource consumption transparent to build real cost awareness."
+            description={t("landing.costing.showback.desc", {
+              defaultValue:
+                "Make team or service resource consumption transparent to build real cost awareness.",
+            })}
             descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
           >
             <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300 flex flex-col">
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Cluster
-                / team breakdown
-              </li>
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Cost
-                trend intuition
-              </li>
+              {showbackItems.map((item) => (
+                <li key={item} className="inline-flex items-center gap-2">
+                  <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+                  {item}
+                </li>
+              ))}
             </ul>
           </Card>
           <Card
-            title="Chargeback"
+            title={t("landing.costing.chargeback.title", {
+              defaultValue: "Chargeback",
+            })}
             titleClassName="text-xl font-bold text-gray-900 dark:text-white"
-            description="Attribute real cost when needed to encourage responsibility and better decisions."
+            description={t("landing.costing.chargeback.desc", {
+              defaultValue:
+                "Attribute real cost when needed to encourage responsibility and better decisions.",
+            })}
             descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
           >
             <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300 flex flex-col">
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" />{" "}
-                Accurate, efficient attribution
-              </li>
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Works
-                with existing stacks
-              </li>
+              {chargeackItems.map((item) => (
+                <li key={item} className="inline-flex items-center gap-2">
+                  <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+                  {item}
+                </li>
+              ))}
             </ul>
           </Card>
         </div>
       </section>
 
-      {/* Philosophy */}
+      {/* Philosophy Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-          Philosophy
+          {t("landing.philosophy.title", {
+            defaultValue: "Philosophy",
+          })}
         </h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
-          RustCost balances three principles to stay useful and unobtrusive —
-          like a fly that lands quietly: it helps without burdening the system.
+          {t("landing.philosophy.desc", {
+            defaultValue:
+              "RustCost balances three principles to stay useful and unobtrusive — like a fly that lands quietly: it helps without burdening the system.",
+          })}
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            "Accuracy — neither excessive nor lax",
-            "Sustainability — minimal load on systems",
-            "Clarity — concise, actionable insights",
-          ].map((text) => (
-            <Card key={text} title={text} titleClassName={"text-base"} />
+          {philosophyItems.map((item) => (
+            <Card key={item} title={item} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
 
-      {/* Architecture */}
+      {/* Architecture Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <div className="rounded-2xl bg-linear-to-br from-gray-50 to-white p-6 shadow-sm ring-1 ring-gray-200 dark:from-gray-900 dark:to-gray-950 dark:ring-gray-800">
           <div className="flex items-center gap-2">
             <RocketLaunchIcon className="h-6 w-6 text-amber-500" />
             <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-              Architecture & Scalability
+              {t("landing.architecture.title", {
+                defaultValue: "Architecture & Scalability",
+              })}
             </h2>
           </div>
-          <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
-            File‑based TSDB, no external DB. Kubernetes‑native integration. Rust
-            backend (Axum) + React UI.
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
+            {t("landing.philosophy.desc", {
+              defaultValue:
+                "File‑based TSDB, no external DB. Kubernetes‑native integration. Rust backend (Axum) + React UI.",
+            })}
           </p>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2 text-gray-700 dark:text-gray-300">
-            <li>• Kubernetes Metrics API, cAdvisor, Node Exporter</li>
-            <li>• Helm Chart deployment</li>
-            <li>• Lightweight footprint (~10MB memory)</li>
-            <li>• Simple scaling and customization</li>
+            {architectureItems.map((item) => (
+              <li>• {item}</li>
+            ))}
           </ul>
         </div>
       </section>
 
-      {/* Use cases */}
+      {/* whyRustCost */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-          Why RustCost
+          {t("landing.whyRustCost.title", {
+            defaultValue: "Why RustCost",
+          })}
         </h2>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
-          Beyond monitoring — toward understanding. Build intuition about your
-          cluster’s cost structure.
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
+          {t("landing.whyRustCost.desc", {
+            defaultValue:
+              "Beyond monitoring — toward understanding. Build intuition about your cluster’s cost structure.",
+          })}
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 dark:text-gray-300">
-          {[
-            "Analyze resource consumption by cluster or team",
-            "Understand and optimize per‑service cost ratios",
-            "Complement Prometheus/Grafana and existing stacks",
-            "Run FinOps experiments and improve awareness",
-            "Operate at scale with clear cost ownership",
-            "Democratize FinOps with a simple, trusted tool",
-          ].map((text) => (
+          {whyRustCostItems.map((text) => (
             <Card key={text} title={text} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
 
-      {/* Roadmap */}
+      {/* Roadmap Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-          Roadmap
+          {t("landing.roadmap.title", {
+            defaultValue: "Roadmap",
+          })}
         </h2>
         <div className="mt-4 flex flex-wrap gap-2 text-sm">
           {[
@@ -263,7 +292,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA Section */}
       <section className="container mx-auto px-4 md:px-6 pb-16 md:pb-24">
         <div className="flex flex-col mx-auto max-w-4xl rounded-2xl justify-center bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white gap-3">
           <div className="flex flex-col items-center justify-center gap-2">

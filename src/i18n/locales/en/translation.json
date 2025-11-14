@@ -43,6 +43,56 @@
         "title": "Vendor Neutral",
         "desc": "RustCost is designed to be vendor-agnostic. It will support consistent cost analysis across AWS, GCP, Azure, and on-premise environments."
       }
+    },
+    "costing": {
+      "title": "Costing",
+      "showback": {
+        "title": "Showback",
+        "desc": "Make team or service resource consumption transparent to build real cost awareness.",
+        "items": ["Cluster / team breakdown", "Cost trend intuition"]
+      },
+      "chargeback": {
+        "title": "Chargeback",
+        "desc": "Attribute real cost when needed to encourage responsibility and better decisions.",
+        "items": [
+          "Accurate, efficient attribution",
+          "Works with existing stacks"
+        ]
+      }
+    },
+    "philosophy": {
+      "title": "Philosophy",
+      "desc": "RustCost balances three principles to stay useful and unobtrusive — like a fly that lands quietly: it helps without burdening the system.",
+      "items": [
+        "Accuracy — neither excessive nor lax",
+        "Sustainability — minimal load on systems",
+        "Clarity — concise, actionable insights"
+      ]
+    },
+    "architecture": {
+      "title": "Architecture & Scalability",
+      "desc": "File-based TSDB, no external DB. Kubernetes-native integration. Rust backend (Axum) + React UI.",
+      "items": [
+        "Kubernetes Metrics API, cAdvisor, Node Exporter",
+        "Lightweight footprint (~10MB memory)",
+        "Helm Chart deployment",
+        "Simple scaling and customization"
+      ]
+    },
+    "whyRustCost": {
+      "title": "Why RustCost",
+      "desc": "Beyond monitoring — toward understanding. Build intuition about your cluster’s cost structure.",
+      "items": [
+        "Analyze resource consumption by cluster or team",
+        "Understand and optimize per-service cost ratios",
+        "Complement Prometheus/Grafana and existing stacks",
+        "Run FinOps experiments and improve awareness",
+        "Operate at scale with clear cost ownership",
+        "Democratize FinOps with a simple, trusted tool"
+      ]
+    },
+    "roadmap": {
+      "title": "Roadmap"
     }
   },
   "footer": {
