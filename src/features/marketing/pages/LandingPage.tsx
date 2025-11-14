@@ -10,6 +10,7 @@ import {
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import BrandLogo from "@/shared/components/BrandLogo";
+import Card from "@/shared/components/Card";
 
 export default function LandingPage() {
   const { lng } = useParams();
@@ -59,10 +60,26 @@ export default function LandingPage() {
     },
   ];
 
+  const showbackItems = t("landing.costing.showback.items", {
+    returnObjects: true,
+  }) as string[];
+  const chargeackItems = t("landing.costing.chargeback.items", {
+    returnObjects: true,
+  }) as string[];
+  const philosophyItems = t("landing.philosophy.items", {
+    returnObjects: true,
+  }) as string[];
+  const architectureItems = t("landing.architecture.items", {
+    returnObjects: true,
+  }) as string[];
+  const whyRustCostItems = t("landing.whyRustCost.items", {
+    returnObjects: true,
+  }) as string[];
+
   return (
     <div className="relative">
-      {/* Hero */}
-      <section className="relative overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden min-h-[calc(100vh-70px)] flex items-center">
         {/* Adjusted overlay: darker neutral gradient for light mode */}
         <div className="pointer-events-none absolute inset-0 " />
         <div className="container mx-auto px-4 md:px-6 py-16 md:py-1 relative z-10">
@@ -70,9 +87,6 @@ export default function LandingPage() {
             {/* Big logo + brand */}
             <div className="mb-6 flex flex-col items-center justify-center gap-5">
               <BrandLogo className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow" />
-              <span className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
-                RustCost
-              </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               {t("landing.hero.title", {
@@ -119,156 +133,145 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features: card grid */}
+      {/* Features Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
           {t("landing.features.title", { defaultValue: "Features" })}
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featureCards.map(({ Icon, title, desc }) => (
-            <div
+            <Card
               key={String(title)}
-              className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              <div className="mb-4 inline-flex rounded-xl bg-amber-500/15 p-3 text-amber-600 dark:text-amber-400">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                {title}
-              </h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                {desc}
-              </p>
-            </div>
+              icon={Icon}
+              title={title}
+              description={desc}
+            />
           ))}
         </div>
       </section>
 
-      {/* Value — Showback & Chargeback */}
+      {/* Costing Section : Showback & Chargeback */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
+        <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+          {t("landing.costing.title", {
+            defaultValue: "Costing",
+          })}
+        </h2>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-              Showback
-            </h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Make team or service resource consumption transparent to build
-              real cost awareness.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Cluster
-                / team breakdown
-              </li>
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Cost
-                trend intuition
-              </li>
+          <Card
+            title={t("landing.costing.showback.title", {
+              defaultValue: "Showback",
+            })}
+            titleClassName="text-xl font-bold text-gray-900 dark:text-white"
+            description={t("landing.costing.showback.desc", {
+              defaultValue:
+                "Make team or service resource consumption transparent to build real cost awareness.",
+            })}
+            descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
+          >
+            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300 flex flex-col">
+              {showbackItems.map((item) => (
+                <li key={item} className="inline-flex items-center gap-2">
+                  <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+                  {item}
+                </li>
+              ))}
             </ul>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-              Chargeback
-            </h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Attribute real cost when needed to encourage responsibility and
-              better decisions.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" />{" "}
-                Accurate, efficient attribution
-              </li>
-              <li className="inline-flex items-center gap-2">
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500" /> Works
-                with existing stacks
-              </li>
+          </Card>
+          <Card
+            title={t("landing.costing.chargeback.title", {
+              defaultValue: "Chargeback",
+            })}
+            titleClassName="text-xl font-bold text-gray-900 dark:text-white"
+            description={t("landing.costing.chargeback.desc", {
+              defaultValue:
+                "Attribute real cost when needed to encourage responsibility and better decisions.",
+            })}
+            descriptionClassName="mt-2 text-gray-600 dark:text-gray-300"
+          >
+            <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300 flex flex-col">
+              {chargeackItems.map((item) => (
+                <li key={item} className="inline-flex items-center gap-2">
+                  <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+                  {item}
+                </li>
+              ))}
             </ul>
-          </div>
+          </Card>
         </div>
       </section>
 
-      {/* Philosophy */}
+      {/* Philosophy Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-          Philosophy
+          {t("landing.philosophy.title", {
+            defaultValue: "Philosophy",
+          })}
         </h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
-          RustCost balances three principles to stay useful and unobtrusive —
-          like a fly that lands quietly: it helps without burdening the system.
+          {t("landing.philosophy.desc", {
+            defaultValue:
+              "RustCost balances three principles to stay useful and unobtrusive — like a fly that lands quietly: it helps without burdening the system.",
+          })}
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            "Accuracy — neither excessive nor lax",
-            "Sustainability — minimal load on systems",
-            "Clarity — concise, actionable insights",
-          ].map((txt) => (
-            <div
-              key={txt}
-              className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              <p className="font-semibold text-gray-900 dark:text-white">
-                {txt}
-              </p>
-            </div>
+          {philosophyItems.map((item) => (
+            <Card key={item} title={item} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
 
-      {/* Architecture */}
+      {/* Architecture Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <div className="rounded-2xl bg-linear-to-br from-gray-50 to-white p-6 shadow-sm ring-1 ring-gray-200 dark:from-gray-900 dark:to-gray-950 dark:ring-gray-800">
           <div className="flex items-center gap-2">
             <RocketLaunchIcon className="h-6 w-6 text-amber-500" />
             <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-              Architecture & Scalability
+              {t("landing.architecture.title", {
+                defaultValue: "Architecture & Scalability",
+              })}
             </h2>
           </div>
-          <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
-            File‑based TSDB, no external DB. Kubernetes‑native integration. Rust
-            backend (Axum) + React UI.
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
+            {t("landing.philosophy.desc", {
+              defaultValue:
+                "File‑based TSDB, no external DB. Kubernetes‑native integration. Rust backend (Axum) + React UI.",
+            })}
           </p>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2 text-gray-700 dark:text-gray-300">
-            <li>• Kubernetes Metrics API, cAdvisor, Node Exporter</li>
-            <li>• Helm Chart deployment</li>
-            <li>• Lightweight footprint (~10MB memory)</li>
-            <li>• Simple scaling and customization</li>
+            {architectureItems.map((item) => (
+              <li>• {item}</li>
+            ))}
           </ul>
         </div>
       </section>
 
-      {/* Use cases */}
+      {/* whyRustCost */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-          Why RustCost
+          {t("landing.whyRustCost.title", {
+            defaultValue: "Why RustCost",
+          })}
         </h2>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
-          Beyond monitoring — toward understanding. Build intuition about your
-          cluster’s cost structure.
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
+          {t("landing.whyRustCost.desc", {
+            defaultValue:
+              "Beyond monitoring — toward understanding. Build intuition about your cluster’s cost structure.",
+          })}
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 dark:text-gray-300">
-          {[
-            "Analyze resource consumption by cluster or team",
-            "Understand and optimize per‑service cost ratios",
-            "Complement Prometheus/Grafana and existing stacks",
-            "Run FinOps experiments and improve awareness",
-            "Operate at scale with clear cost ownership",
-            "Democratize FinOps with a simple, trusted tool",
-          ].map((item) => (
-            <div
-              key={item}
-              className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              {item}
-            </div>
+          {whyRustCostItems.map((text) => (
+            <Card key={text} title={text} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
 
-      {/* Roadmap */}
+      {/* Roadmap Section */}
       <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-          Roadmap
+          {t("landing.roadmap.title", {
+            defaultValue: "Roadmap",
+          })}
         </h2>
         <div className="mt-4 flex flex-wrap gap-2 text-sm">
           {[
@@ -289,40 +292,42 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA Section */}
       <section className="container mx-auto px-4 md:px-6 pb-16 md:pb-24">
-        <div className="mx-auto max-w-3xl rounded-2xl bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white">
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h3 className="text-2xl font-extrabold">
-                {t("landing.cta.headline", {
-                  defaultValue: "Understand and improve your costs",
-                })}
-              </h3>
-              <p className="text-gray-300 dark:text-gray-300">
-                {t("landing.cta.sub", {
-                  defaultValue:
-                    "Install with Helm and get cost awareness in minutes.",
-                })}
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <a
-                href={`${prefix}/docs`}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-gray-900 shadow hover:bg-gray-100 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
-              >
+        <div className="flex flex-col mx-auto max-w-4xl rounded-2xl justify-center bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white gap-3">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <h3 className="text-2xl font-extrabold">
+              {t("landing.cta.headline", {
+                defaultValue: "Understand and improve your costs",
+              })}
+            </h3>
+            <p className="text-gray-300 dark:text-gray-300">
+              {t("landing.cta.sub", {
+                defaultValue:
+                  "Install with Helm and get cost awareness in minutes.",
+              })}
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+            <a
+              href={`${prefix}/docs`}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-gray-900 shadow hover:bg-gray-100 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
+            >
+              <span className="leading-tight">
                 {t("landing.cta.getStarted", { defaultValue: "Get Started" })}
-                <ArrowRightIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/rustcost/rustcost"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-white hover:bg-white/10 dark:border-white/30 dark:hover:bg-white/10"
-              >
+              </span>
+              <ArrowRightIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/rustcost/rustcost"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-4 py-2 text-white hover:bg-white/10 dark:border-white/30 dark:hover:bg-white/10"
+            >
+              <span className="leading-tight">
                 {t("landing.cta.star", { defaultValue: "Star on GitHub" })}
-              </a>
-            </div>
+              </span>
+            </a>
           </div>
         </div>
       </section>
