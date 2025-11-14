@@ -7,10 +7,6 @@
     "support": "지원",
     "blog": "블로그"
   },
-  "blog": {
-    "title": "RustCost 블로그",
-    "subtitle": "RustCost 팀의 소식과 아티클 (API 연동 예정)."
-  },
   "landing": {
     "title": "RustCost — 쿠버네티스를 위한 가벼운 FinOps",
     "subtitle": "클러스터 비용을 모니터링하고 최적화하며 이해하세요.",
@@ -95,10 +91,6 @@
   "footer": {
     "copyright": "쿠버네티스를 위한 오픈 FinOps"
   },
-  "support": {
-    "title": "후원",
-    "subtitle": "RustCost를 후원하는 파트너와 기업들."
-  },
   "docs": {
     "title": "문서",
     "install": "설치 가이드"
@@ -121,17 +113,19 @@
     },
     "feed": {
       "placeholder": "커뮤니티 피드와 이벤트가 여기에 표시됩니다 (API 연동 예정)."
-    },
-    "blog": {
-      "title": "블로그",
-      "desc": "RustCost 팀의 소식과 아티클 (API 연동 예정).",
-      "cta": "블로그 열기"
-    },
+    }
+  },
+  "support": {
+    "title": "후원",
+    "subtitle": "RustCost를 후원하는 파트너와 기업들.",
     "supporters": {
       "title": "후원사",
-      "add": "귀사의 로고 추가하기",
-      "applyLink": "https://github.com/rustcost/rustcost/issues/new?title=Supporter%20Application&labels=sponsor",
+      "addApply": "후원사 신청하기",
       "note": "후원사 여러분께 감사드립니다. 표시는 알파벳 순(스폰서 우선)으로 정렬됩니다."
     }
+  },
+  "blog": {
+    "title": "RustCost 블로그",
+    "subtitle": "RustCost 팀의 소식과 아티클 (API 연동 예정)."
   }
 }
