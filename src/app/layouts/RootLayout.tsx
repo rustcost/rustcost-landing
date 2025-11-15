@@ -3,15 +3,19 @@ import { useEffect } from "react";
 import Navbar from "@/app/layouts/Navbar";
 import TopBar from "@/app/layouts/TopBar";
 import i18n from "@/i18n/i18n";
+import { normalizeLanguageCode } from "@/constants/language";
+import type { LanguageCode } from "@/types/i18n";
 
 export default function RootLayout() {
-  const { lng } = useParams();
+  type LanguageParams = { ["lng"]?: LanguageCode };
+  const params = useParams<LanguageParams>();
+  const language = normalizeLanguageCode(params["lng"]);
 
   useEffect(() => {
-    if (lng && i18n.language !== lng) {
-      i18n.changeLanguage(lng);
+    if (i18n.language !== language) {
+      i18n.changeLanguage(language);
     }
-  }, [lng]);
+  }, [language]);
 
   const showTopBar = import.meta.env.VITE_APP_ENV !== "PROD";
 

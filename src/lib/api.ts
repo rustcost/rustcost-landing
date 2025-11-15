@@ -1,11 +1,22 @@
-﻿import axios, { AxiosError, type AxiosInstance } from "axios";
+import axios, { AxiosError, type AxiosInstance } from "axios";
+import {
+  API_BASE_URL,
+  API_TIMEOUT_MS,
+  DEFAULT_DOCKER_TAG_PAGE_SIZE,
+  DOCKER_DASHBOARD_PATH,
+  DOCKER_HUB_BASE_URL,
+} from "@/constants/api";
+import type { DockerHubTagsResponse } from "@/types/api";
 
 export class ApiClientError extends Error {
   status?: number;
   details?: unknown;
   cause?: unknown;
 
-  constructor(message: string, options: { status?: number; details?: unknown; cause?: unknown } = {}) {
+  constructor(
+    message: string,
+    options: { status?: number; details?: unknown; cause?: unknown } = {}
+  ) {
     super(message);
     this.name = "ApiClientError";
     this.status = options.status;
@@ -14,18 +25,19 @@ export class ApiClientError extends Error {
   }
 }
 
-const API_TIMEOUT = 20000;
-const DOCKER_HUB_BASE_URL = "/docker-hub/v2/";
-const DOCKER_DASHBOARD_PATH = "repositories/kimc1992/rustcost-dashboard/tags";
-
 const toApiClientError = (error: AxiosError) => {
   const status = error.response?.status;
   const details = error.response?.data ?? error.message;
   const maybeMessage =
-    typeof error.response?.data === "object" && error.response?.data && "message" in (error.response.data as Record<string, unknown>)
+    typeof error.response?.data === "object" &&
+    error.response?.data &&
+    "message" in (error.response.data as Record<string, unknown>)
       ? (error.response.data as { message?: unknown }).message
       : undefined;
-  const message = (maybeMessage !== undefined ? String(maybeMessage) : undefined) ?? error.message ?? "Network request failed";
+  const message =
+    (maybeMessage !== undefined ? String(maybeMessage) : undefined) ??
+    error.message ??
+    "Network request failed";
 
   return new ApiClientError(status ? `[${status}] ${message}` : message, {
     status,
@@ -34,7 +46,9 @@ const toApiClientError = (error: AxiosError) => {
   });
 };
 
-const createClient = (config: Parameters<typeof axios.create>[0]): AxiosInstance => {
+const createClient = (
+  config: Parameters<typeof axios.create>[0]
+): AxiosInstance => {
   const client = axios.create(config);
   client.interceptors.response.use(
     (response) => response,
@@ -44,33 +58,23 @@ const createClient = (config: Parameters<typeof axios.create>[0]): AxiosInstance
 };
 
 export const apiClient = createClient({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
-  timeout: API_TIMEOUT,
+  baseURL: API_BASE_URL,
+  timeout: API_TIMEOUT_MS,
 });
 
 const dockerHubClient = createClient({
   baseURL: DOCKER_HUB_BASE_URL,
-  timeout: API_TIMEOUT,
+  timeout: API_TIMEOUT_MS,
 });
 
-export interface DockerHubTag {
-  name: string;
-  last_updated: string;
-  full_size: number;
-  tag_status?: string;
-  images?: Array<{ architecture?: string; digest?: string }>;
-}
-
-export interface DockerHubTagsResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: DockerHubTag[];
-}
-
-export const fetchDockerHubDashboardTags = async (pageSize = 100) => {
-  const response = await dockerHubClient.get<DockerHubTagsResponse>(DOCKER_DASHBOARD_PATH, {
-    params: { page_size: pageSize },
-  });
+export const fetchDockerHubDashboardTags = async (
+  pageSize = DEFAULT_DOCKER_TAG_PAGE_SIZE
+) => {
+  const response = await dockerHubClient.get<DockerHubTagsResponse>(
+    DOCKER_DASHBOARD_PATH,
+    {
+      params: { page_size: pageSize },
+    }
+  );
   return response.data;
 };

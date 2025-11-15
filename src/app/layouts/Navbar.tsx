@@ -1,29 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavLink, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import {
-  Bars3Icon,
-  GlobeAltIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeToggle from "@/shared/components/ThemeToggle";
 import BrandLogo from "@/shared/components/BrandLogo";
+import LangSelect from "@/shared/components/LangSelect";
+import {
+  buildLanguagePrefix,
+  normalizeLanguageCode,
+  replaceLanguageInPath,
+} from "@/constants/language";
+import { NAVIGATION_LINKS } from "@/constants/routes";
+import type { LanguageCode } from "@/types/i18n";
 
 export default function Navbar() {
   const { t } = useTranslation();
-  const { lng } = useParams();
-  const prefix = `/${lng || "en"}`;
+  type LanguageParams = { ["lng"]?: LanguageCode };
+  const params = useParams<LanguageParams>();
+  const activeLanguage = normalizeLanguageCode(params["lng"]);
+  const prefix = buildLanguagePrefix(activeLanguage);
   const [open, setOpen] = useState(false);
 
   const navLinkClass =
     "hover:text-yellow-400 transition-colors px-4 py-2 text-lg font-semibold";
 
-  const handleLangChange = (newLang: string) => {
-    const path = window.location.pathname;
-    // replace current `/:lng` prefix
-    const next = `/${newLang}${path.slice(3)}`;
-    window.location.pathname = next;
+  const buildLinkPath = (segment: string) =>
+    segment ? `${prefix}/${segment}` : `${prefix}/`;
+
+  const handleLangChange = (newLang: LanguageCode) => {
+    const nextPath = replaceLanguageInPath(window.location.pathname, newLang);
+    window.location.pathname = nextPath;
   };
 
   useEffect(() => {
@@ -49,43 +55,23 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex gap-4 lg:gap-6 text-gray-700 dark:text-gray-300">
-          <NavLink to={`${prefix}/`} end className={navLinkClass}>
-            {t("navbar.home")}
-          </NavLink>
-          <NavLink to={`${prefix}/docs`} className={navLinkClass}>
-            {t("navbar.docs")}
-          </NavLink>
-          <NavLink to={`${prefix}/download`} className={navLinkClass}>
-            {t("navbar.download")}
-          </NavLink>
-          <NavLink to={`${prefix}/community`} className={navLinkClass}>
-            {t("navbar.community")}
-          </NavLink>
-          <NavLink to={`${prefix}/support`} className={navLinkClass}>
-            {t("navbar.support")}
-          </NavLink>
-          <NavLink to={`${prefix}/blog`} className={navLinkClass}>
-            {t("navbar.blog")}
-          </NavLink>
+          {NAVIGATION_LINKS.map((link) => (
+            <NavLink
+              key={`desktop-${link.key}`}
+              to={buildLinkPath(link.segment)}
+              end={link.exact}
+              className={navLinkClass}
+            >
+              {t(link.i18nKey)}
+            </NavLink>
+          ))}
         </nav>
 
         {/* Desktop actions */}
         <div className="hidden lg:flex items-center gap-3">
           <ThemeToggle />
           {/* Language Toggle */}
-          <div className="relative">
-            <GlobeAltIcon className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" />
-            <select
-              className="appearance-none pl-7 pr-6 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 
-                     bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 
-                     focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors"
-              value={lng}
-              onChange={(e) => handleLangChange(e.target.value)}
-            >
-              <option value="en">EN</option>
-              <option value="ko">KR</option>
-            </select>
-          </div>
+          <LangSelect value={activeLanguage} onChange={handleLangChange} />
         </div>
 
         {/* Mobile hamburger */}
@@ -120,30 +106,20 @@ export default function Navbar() {
           <div className="px-4 pt-4 border-t border-gray-100 dark:border-gray-800">
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <select
-                className="bg-transparent border border-gray-300 dark:border-gray-700 text-sm rounded px-2.5 py-1 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-yellow-400"
-                value={lng}
-                onChange={(e) => handleLangChange(e.target.value)}
-              >
-                <option value="en">EN</option>
-                <option value="ko">KR</option>
-              </select>
+              <LangSelect
+                value={activeLanguage}
+                onChange={handleLangChange}
+                variant="mobile"
+              />
             </div>
           </div>
 
           <nav className="mt-6 flex flex-col items-stretch gap-2 px-4">
-            {[
-              { to: `${prefix}/`, label: t("navbar.home"), end: true },
-              { to: `${prefix}/docs`, label: t("navbar.docs") },
-              { to: `${prefix}/download`, label: t("navbar.download") },
-              { to: `${prefix}/community`, label: t("navbar.community") },
-              { to: `${prefix}/support`, label: t("navbar.support") },
-              { to: `${prefix}/blog`, label: t("navbar.blog") },
-            ].map((item) => (
+            {NAVIGATION_LINKS.map((link) => (
               <NavLink
-                key={item.to}
-                to={item.to}
-                end={(item as any).end}
+                key={`mobile-${link.key}`}
+                to={buildLinkPath(link.segment)}
+                end={link.exact}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   `w-full rounded-xl px-5 py-4 text-2xl font-bold transition-colors ${
@@ -153,7 +129,7 @@ export default function Navbar() {
                   }`
                 }
               >
-                {item.label}
+                {t(link.i18nKey)}
               </NavLink>
             ))}
           </nav>

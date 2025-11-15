@@ -6,6 +6,11 @@ import remarkGfm from "remark-gfm";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { HashtagIcon } from "@heroicons/react/24/outline";
 import type { JSX } from "react/jsx-runtime";
+import {
+  buildLanguagePrefix,
+  normalizeLanguageCode,
+} from "@/constants/language";
+import type { LanguageCode } from "@/types/i18n";
 
 type TocItem = { id: string; text: string; level: number };
 
@@ -41,8 +46,13 @@ function normalizeMd(raw: string): string {
 }
 
 export default function DocsPage() {
-  const { lng, topic } = useParams();
-  const currentTopic = topic ?? "index";
+  type DocsParams = {
+    ["lng"]?: LanguageCode;
+    ["topic"]?: string;
+  };
+  const params = useParams<DocsParams>();
+  const language = normalizeLanguageCode(params["lng"]);
+  const currentTopic = params["topic"] ?? "index";
   const [content, setContent] = useState("");
   const [topics, setTopics] = useState<{ slug: string; title: string }[]>([]);
   const [open, setOpen] = useState(false);
@@ -56,7 +66,7 @@ export default function DocsPage() {
     const load = async () => {
       // Build topics list for the language with numeric ordering support
       const keys = Object.keys(files).filter((k) =>
-        k.startsWith(`../content/${lng}/`)
+        k.startsWith(`../content/${language}/`)
       );
       type Item = {
         fileKey: string;
@@ -105,19 +115,19 @@ export default function DocsPage() {
       let resolved = items.find((i) => i.displaySlug === desired)?.fileKey;
       if (!resolved) {
         // fallback to non-numbered path if exists
-        const fallback = `../content/${lng}/${desired}.md`;
+        const fallback = `../content/${language}/${desired}.md`;
         if (files[fallback]) resolved = fallback;
       }
       if (resolved && files[resolved]) {
         const raw = (await files[resolved]!()) as string;
         setContent(normalizeMd(raw));
       } else {
-        setContent(`# 404\nNot found: ${lng}/${desired}`);
+        setContent(`# 404\nNot found: ${language}/${desired}`);
       }
     };
 
     load();
-  }, [lng, currentTopic]);
+  }, [language, currentTopic]);
 
   // Build table of contents
   const toc: TocItem[] = useMemo(() => {
@@ -194,7 +204,10 @@ export default function DocsPage() {
       );
     };
 
-  const prefix = `/${lng || "en"}`;
+  const prefix = buildLanguagePrefix(language);
+  const docsBasePath = `${prefix}/${"docs"}`;
+  const buildDocPath = (slug?: string) =>
+    slug && slug !== "index" ? `${docsBasePath}/${slug}` : docsBasePath;
 
   return (
     <div className="relative">
@@ -217,13 +230,9 @@ export default function DocsPage() {
             {topics.map((t) => (
               <Link
                 key={t.slug}
-                to={
-                  t.slug === "index"
-                    ? `${prefix}/docs`
-                    : `${prefix}/docs/${t.slug}`
-                }
+                to={buildDocPath(t.slug)}
                 className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                  (topic ?? "index") === t.slug
+                  currentTopic === t.slug
                     ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                     : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/70"
                 }`}
@@ -328,10 +337,7 @@ export default function DocsPage() {
                 }
                 if (url.startsWith("./")) {
                   const slug = url.replace(/^\.\//, "").replace(/\.md$/, "");
-                  const to =
-                    slug === "index"
-                      ? `${prefix}/docs`
-                      : `${prefix}/docs/${slug}`;
+                  const to = buildDocPath(slug);
                   return (
                     <Link to={to} className={classes} {...(aProps as any)}>
                       {children}
@@ -358,11 +364,7 @@ export default function DocsPage() {
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 not-prose">
                 {prev && (
                   <Link
-                    to={
-                      prev.slug === "index"
-                        ? `${prefix}/docs`
-                        : `${prefix}/docs/${prev.slug}`
-                    }
+                    to={buildDocPath(prev.slug)}
                     className="group rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
                   >
                     {"< "}
@@ -371,11 +373,7 @@ export default function DocsPage() {
                 )}
                 {next && (
                   <Link
-                    to={
-                      next.slug === "index"
-                        ? `${prefix}/docs`
-                        : `${prefix}/docs/${next.slug}`
-                    }
+                    to={buildDocPath(next.slug)}
                     className="group justify-self-end rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
                   >
                     {next.title}
@@ -440,14 +438,10 @@ export default function DocsPage() {
               {topics.map((t) => (
                 <Link
                   key={t.slug}
-                  to={
-                    t.slug === "index"
-                      ? `${prefix}/docs`
-                      : `${prefix}/docs/${t.slug}`
-                  }
+                  to={buildDocPath(t.slug)}
                   onClick={() => setOpen(false)}
                   className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                    (topic ?? "index") === t.slug
+                    currentTopic === t.slug
                       ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                       : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/70"
                   }`}

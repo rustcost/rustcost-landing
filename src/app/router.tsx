@@ -7,11 +7,12 @@ import SupportPage from "@/features/marketing/pages/SupportPage";
 import CommunityPage from "@/features/marketing/pages/CommunityPage";
 import BlogPage from "@/features/blog/pages/BlogPage";
 import BlogPost from "@/features/blog/pages/BlogPost";
+import { buildLanguagePrefix } from "@/constants/language";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/en" replace />,
+    element: <Navigate to={buildLanguagePrefix()} replace />,
   },
   {
     path: "/:lng",
@@ -20,18 +21,21 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <LandingPage /> },
       {
-        path: "/:lng/docs",
+        path: "docs",
         element: <DocsPage />,
       },
       {
-        path: "/:lng/docs/:topic",
+        path: `docs/:topic`,
         element: <DocsPage />,
       },
       { path: "download", element: <DownloadPage /> },
       { path: "community", element: <CommunityPage /> },
       { path: "support", element: <SupportPage /> },
       { path: "blog", element: <BlogPage /> },
-      { path: "blog/:slug", element: <BlogPost /> },
+      {
+        path: `blog/:slug`,
+        element: <BlogPost />,
+      },
     ],
   },
 ]);

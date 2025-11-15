@@ -1,30 +1,38 @@
 import { useEffect, useState } from "react";
-
-type ColorScheme = "light" | "dark";
-
-const DARK_QUERY = "(prefers-color-scheme: dark)";
+import type { ColorScheme } from "@/types/theme";
+import {
+  COLOR_SCHEME_DARK,
+  COLOR_SCHEME_LIGHT,
+  DARK_SCHEME_MEDIA_QUERY,
+  DEFAULT_COLOR_SCHEME,
+  THEME_STORAGE_KEY,
+} from "@/constants/theme";
 
 const getInitialScheme = (): ColorScheme => {
   if (typeof window === "undefined") {
-    return "light";
+    return DEFAULT_COLOR_SCHEME;
   }
 
-  const storedTheme = window.localStorage.getItem("theme");
-  if (storedTheme === "dark" || storedTheme === "light") {
+  const storedTheme = window.localStorage.getItem(
+    THEME_STORAGE_KEY
+  ) as ColorScheme | null;
+  if (storedTheme === COLOR_SCHEME_DARK || storedTheme === COLOR_SCHEME_LIGHT) {
     return storedTheme;
   }
 
-  return window.matchMedia(DARK_QUERY).matches ? "dark" : "light";
+  return window.matchMedia(DARK_SCHEME_MEDIA_QUERY).matches
+    ? COLOR_SCHEME_DARK
+    : COLOR_SCHEME_LIGHT;
 };
 
 const getDocumentScheme = (): ColorScheme => {
   if (typeof document === "undefined") {
-    return "light";
+    return DEFAULT_COLOR_SCHEME;
   }
 
   return document.documentElement.classList.contains("dark")
-    ? "dark"
-    : "light";
+    ? COLOR_SCHEME_DARK
+    : COLOR_SCHEME_LIGHT;
 };
 
 export const useColorScheme = (): ColorScheme => {
@@ -35,17 +43,21 @@ export const useColorScheme = (): ColorScheme => {
       return;
     }
 
-    const mediaQuery = window.matchMedia(DARK_QUERY);
+    const mediaQuery = window.matchMedia(DARK_SCHEME_MEDIA_QUERY);
     const handleDocumentMutation = () => setScheme(getDocumentScheme());
     const handleMediaChange = (event: MediaQueryListEvent) => {
-      const storedTheme = window.localStorage.getItem("theme");
+      const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
       if (!storedTheme) {
-        setScheme(event.matches ? "dark" : "light");
+        setScheme(event.matches ? COLOR_SCHEME_DARK : COLOR_SCHEME_LIGHT);
       }
     };
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === "theme" && event.newValue) {
-        setScheme(event.newValue === "dark" ? "dark" : "light");
+      if (event.key === THEME_STORAGE_KEY && event.newValue) {
+        setScheme(
+          event.newValue === COLOR_SCHEME_DARK
+            ? COLOR_SCHEME_DARK
+            : COLOR_SCHEME_LIGHT
+        );
       }
     };
 
