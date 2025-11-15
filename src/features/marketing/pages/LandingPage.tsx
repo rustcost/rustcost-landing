@@ -79,7 +79,7 @@ export default function LandingPage() {
   return (
     <div className="relative">
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[calc(100vh-70px)] flex items-center">
+      <section className="relative overflow-hidden min-h-[calc(100vh-134px)] flex items-center mb-8">
         {/* Adjusted overlay: darker neutral gradient for light mode */}
         <div className="pointer-events-none absolute inset-0 " />
         <div className="container mx-auto px-4 md:px-6 py-16 md:py-1 relative z-10">
