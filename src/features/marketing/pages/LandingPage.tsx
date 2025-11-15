@@ -11,10 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import BrandLogo from "@/shared/components/BrandLogo";
 import Card from "@/shared/components/Card";
+import { buildLanguagePrefix } from "@/constants/language";
+import type { LanguageCode } from "@/types/i18n";
 
 export default function LandingPage() {
-  const { lng } = useParams();
-  const prefix = `/${lng || "en"}`;
+  type LanguageParams = { ["lng"]?: LanguageCode };
+  const params = useParams<LanguageParams>();
+  const prefix = buildLanguagePrefix(params["lng"]);
   const { t } = useTranslation();
 
   const featureCards = [
@@ -101,7 +104,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href={`${prefix}/docs`}
+                href={`${prefix}/${"docs"}`}
                 className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-white shadow hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
               >
                 {t("landing.cta.getStarted", { defaultValue: "Get Started" })}
@@ -310,7 +313,7 @@ export default function LandingPage() {
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
             <a
-              href={`${prefix}/docs`}
+              href={`${prefix}/${"docs"}`}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-gray-900 shadow hover:bg-gray-100 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
             >
               <span className="leading-tight">

@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import type { LanguageCode } from "@/types/i18n";
+import { buildLanguagePrefix } from "@/constants/language";
 
 export default function CommunityPage() {
-  const { lng } = useParams();
   const { t } = useTranslation();
-  const prefix = `/${lng || "en"}`;
+  type LanguageParams = { ["lng"]?: LanguageCode };
+  const params = useParams<LanguageParams>();
+  const prefix = buildLanguagePrefix(params["lng"]);
 
   const postsKo = [
     {
@@ -70,7 +73,7 @@ export default function CommunityPage() {
             })}
           </p>
           <ul className="mt-3 list-disc pl-5 text-sm text-gray-700 dark:text-gray-300">
-            {(lng === "ko" ? postsKo : postsKo).map((p) => (
+            {postsKo.map((p) => (
               <li key={p.href}>
                 <a
                   className="text-blue-600 underline dark:text-amber-400"

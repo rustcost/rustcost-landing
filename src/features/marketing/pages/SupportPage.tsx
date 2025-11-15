@@ -1,39 +1,34 @@
 import { useTranslation } from "react-i18next";
+import { SUPPORT_APPLY_URL, SUPPORTERS } from "@/constants/support";
+import type { Supporter } from "@/types/support";
 
-type Supporter = {
-  href: string;
-  alt: string;
-  lightSrc: string;
-  darkSrc?: string; // if omitted, lightSrc is used for both themes
-};
-
-function SupporterCard({ s }: { s: Supporter }) {
+function SupporterCard({ supporter }: { supporter: Supporter }) {
   return (
     <a
-      href={s.href}
+      href={supporter.href}
       target="_blank"
       rel="noreferrer"
       className="flex items-center justify-center rounded-xl border border-gray-200 bg-gray-50 p-6 transition hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/50 dark:hover:bg-gray-800"
     >
-      {s.darkSrc ? (
+      {supporter.darkSrc ? (
         <>
           <img
-            src={s.lightSrc}
-            alt={s.alt}
+            src={supporter.lightSrc}
+            alt={supporter.alt}
             loading="lazy"
             className="max-h-16 object-contain block dark:hidden"
           />
           <img
-            src={s.darkSrc}
-            alt={s.alt}
+            src={supporter.darkSrc}
+            alt={supporter.alt}
             loading="lazy"
             className="max-h-16 object-contain hidden dark:block"
           />
         </>
       ) : (
         <img
-          src={s.lightSrc}
-          alt={s.alt}
+          src={supporter.lightSrc}
+          alt={supporter.alt}
           loading="lazy"
           className="max-h-16 object-contain"
         />
@@ -64,9 +59,7 @@ export default function SupportPage() {
             {t("support.supporters.title", { defaultValue: "Supporters" })}
           </h2>
           <a
-            href={
-              "https://www.linkedin.com/in/songkim1992?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            }
+            href={SUPPORT_APPLY_URL}
             target="_blank"
             rel="noreferrer"
             className="rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-800 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800"
@@ -78,14 +71,9 @@ export default function SupportPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <SupporterCard
-            s={{
-              href: "https://www.cloudbro.ai",
-              alt: "CloudBro",
-              lightSrc: "/images/company/cloudbro.png",
-              darkSrc: "/images/company/cloudbro-dark.png",
-            }}
-          />
+          {SUPPORTERS.map((supporter) => (
+            <SupporterCard key={supporter.href} supporter={supporter} />
+          ))}
         </div>
 
         <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
