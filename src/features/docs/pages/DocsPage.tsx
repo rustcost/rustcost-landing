@@ -45,6 +45,38 @@ function normalizeMd(raw: string): string {
   return out.join("\n");
 }
 
+const docFiles = import.meta.glob("../content/*/*.md", { as: "raw" });
+
+type DocCacheValue = {
+  normalized: string;
+  title?: string;
+};
+
+const docCache = new Map<string, Promise<DocCacheValue>>();
+
+function loadDoc(fileKey: string): Promise<DocCacheValue> {
+  const loader = docFiles[fileKey];
+  if (!loader) {
+    return Promise.reject(new Error("Doc not found for key: " + fileKey));
+  }
+
+  if (!docCache.has(fileKey)) {
+    docCache.set(
+      fileKey,
+      (async () => {
+        const raw = (await loader()) as string;
+        const heading = /^\s*#\s+(.+)$/m.exec(raw)?.[1].trim();
+        return {
+          normalized: normalizeMd(raw),
+          title: heading,
+        };
+      })()
+    );
+  }
+
+  return docCache.get(fileKey)!;
+}
+
 export default function DocsPage() {
   type DocsParams = {
     ["lng"]?: LanguageCode;
@@ -59,74 +91,100 @@ export default function DocsPage() {
   const [activeId, setActiveId] = useState<string>("");
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
 
-  // Load content and build sidebar topics
   useEffect(() => {
-    const files = import.meta.glob("../content/*/*.md", { as: "raw" });
+    let cancelled = false;
 
-    const load = async () => {
-      // Build topics list for the language with numeric ordering support
-      const keys = Object.keys(files).filter((k) =>
-        k.startsWith(`../content/${language}/`)
-      );
-      type Item = {
-        fileKey: string;
-        slug: string;
-        displaySlug: string;
-        title: string;
-        order: number;
-      };
-      const items: Item[] = [];
+    type Item = {
+      fileKey: string;
+      slug: string;
+      displaySlug: string;
+      title: string;
+      order: number;
+    };
 
-      for (const k of keys) {
-        const filename = k.split("/").pop()!; // e.g., 001_overview.md
-        const base = filename.replace(/\.md$/, "");
-        let order = Number.POSITIVE_INFINITY;
-        let displaySlug = base;
-        const mOrder = /^(\d{2,3})[_-](.+)$/.exec(base);
-        if (mOrder) {
-          order = parseInt(mOrder[1], 10);
-          displaySlug = mOrder[2];
-        } else if (base === "index") {
-          order = Number.NEGATIVE_INFINITY; // keep index at very top
-          displaySlug = "index";
-        }
+    const keys = Object.keys(docFiles).filter((k) =>
+      k.startsWith(`../content/${language}/`)
+    );
 
-        let title = displaySlug
-          .replace(/[-_]/g, " ")
-          .replace(/\b\w/g, (c) => c.toUpperCase());
-        try {
-          const raw = await files[k]();
-          const m = /^\s*#\s+(.+)$/m.exec(raw);
-          if (m) title = m[1].trim();
-        } catch {}
+    const items: Item[] = keys.map((k) => {
+      const filename = k.split("/").pop()!; // e.g., 001_overview.md
+      const base = filename.replace(/\.md$/, "");
+      let order = Number.POSITIVE_INFINITY;
+      let displaySlug = base;
 
-        items.push({ fileKey: k, slug: base, displaySlug, title, order });
+      const mOrder = /^(\d{2,3})[_-](.+)$/.exec(base);
+      if (mOrder) {
+        order = parseInt(mOrder[1], 10);
+        displaySlug = mOrder[2];
+      } else if (base === "index") {
+        order = Number.NEGATIVE_INFINITY; // keep index at very top
+        displaySlug = "index";
       }
 
-      items.sort((a, b) =>
-        a.order === b.order ? a.title.localeCompare(b.title) : a.order - b.order
-      );
+      const fallbackTitle = displaySlug
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+
+      return {
+        fileKey: k,
+        slug: base,
+        displaySlug,
+        title: fallbackTitle,
+        order,
+      };
+    });
+
+    items.sort((a, b) =>
+      a.order === b.order ? a.title.localeCompare(b.title) : a.order - b.order
+    );
+
+    if (!cancelled) {
       setTopics(
         items.map(({ displaySlug, title }) => ({ slug: displaySlug, title }))
       );
+    }
 
-      // Resolve current topic to an actual fileKey (prefer numbered match)
-      const desired = currentTopic;
-      let resolved = items.find((i) => i.displaySlug === desired)?.fileKey;
-      if (!resolved) {
-        // fallback to non-numbered path if exists
-        const fallback = `../content/${language}/${desired}.md`;
-        if (files[fallback]) resolved = fallback;
+    const desired = currentTopic;
+    const fallbackPath = `../content/${language}/${desired}.md`;
+    let resolved = items.find((i) => i.displaySlug === desired)?.fileKey;
+    if (!resolved && docFiles[fallbackPath]) {
+      resolved = fallbackPath;
+    }
+
+    if (resolved && docFiles[resolved]) {
+      loadDoc(resolved)
+        .then((doc) => {
+          if (!cancelled) {
+            setContent(doc.normalized);
+          }
+        })
+        .catch(() => {
+          if (!cancelled) {
+            setContent(`# 404\nNot found: ${language}/${desired}`);
+          }
+        });
+    } else {
+      setContent(`# 404\nNot found: ${language}/${desired}`);
+    }
+
+    Promise.all(
+      items.map(async ({ fileKey, displaySlug, title }) => {
+        try {
+          const doc = await loadDoc(fileKey);
+          return { slug: displaySlug, title: doc.title ?? title };
+        } catch {
+          return { slug: displaySlug, title };
+        }
+      })
+    ).then((loadedTopics) => {
+      if (!cancelled) {
+        setTopics(loadedTopics);
       }
-      if (resolved && files[resolved]) {
-        const raw = (await files[resolved]!()) as string;
-        setContent(normalizeMd(raw));
-      } else {
-        setContent(`# 404\nNot found: ${language}/${desired}`);
-      }
+    });
+
+    return () => {
+      cancelled = true;
     };
-
-    load();
   }, [language, currentTopic]);
 
   // Build table of contents

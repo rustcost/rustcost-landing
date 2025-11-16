@@ -243,7 +243,7 @@ export default function LandingPage() {
           </p>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2 text-gray-700 dark:text-gray-300">
             {architectureItems.map((item) => (
-              <li>• {item}</li>
+              <li key={item}>• {item}</li>
             ))}
           </ul>
         </div>
