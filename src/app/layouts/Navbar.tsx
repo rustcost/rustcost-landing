@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-gray-50/90 dark:bg-gray-900/80 backdrop-blur shadow-md">
-      <div className="container mx-auto flex justify-between items-center px-4 lg:px-6 py-3">
+      <div className="max-w-7xl w-full mx-auto flex justify-between items-center px-4 lg:px-6 py-3">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <BrandLogo className="h-12 w-12 rounded-full shadow-sm" />

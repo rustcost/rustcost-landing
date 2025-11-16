@@ -23,7 +23,7 @@ export default function RootLayout() {
     <div className="flex flex-col min-h-screen">
       {showTopBar && <TopBar />}
       <Navbar />
-      <main className="grow container mx-auto px-4 md:px-6 py-8">
+      <main className="grow container max-w-7xl mx-auto px-4 md:px-6 py-8">
         <Outlet />
       </main>
       <footer className="bg-gray-100 dark:bg-gray-800 text-gray-500 text-center py-4 text-sm">
