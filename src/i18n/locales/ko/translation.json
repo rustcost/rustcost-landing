@@ -45,12 +45,18 @@
       "showback": {
         "title": "비용 가시화 (Showback)",
         "desc": "팀 또는 서비스의 리소스 사용량을 투명하게 보여 주어 실질적인 비용 인식을 높입니다.",
-        "items": ["클러스터 / 팀별 사용량 분석", "비용 추세에 대한 직관 제공"]
+        "items": [
+          "클러스터 / 팀별 사용량 분석",
+          "비용 추세에 대한 직관 제공"
+        ]
       },
       "chargeback": {
         "title": "비용 배분 (Chargeback)",
         "desc": "정확한 비용을 팀 또는 서비스에 배분하여 책임성과 더 나은 의사결정을 돕습니다.",
-        "items": ["정확하고 효율적인 비용 배분", "기존 스택과의 호환성 유지"]
+        "items": [
+          "정확하고 효율적인 비용 배분",
+          "기존 스택과의 호환성 유지"
+        ]
       }
     },
     "philosophy": {
@@ -127,5 +133,36 @@
   "blog": {
     "title": "RustCost 블로그",
     "subtitle": "RustCost 팀의 소식과 아티클 (API 연동 예정)."
+  },
+  "seo": {
+    "siteName": "RustCost",
+    "defaultTitle": "RustCost �� ������Ƽ���� ���� �淮 FinOps",
+    "defaultDescription": "RustCost�� ������Ƽ�� ����� �����ϰ� ����ȭ�ϵ��� ���� ���� FinOps ������ �����Դϴ�.",
+    "landing": {
+      "title": "RustCost �� ���������� ����� FinOps ������",
+      "description": "������ RustCost�� ������Ƽ�� ����� �����ϰ� �м��ϰ� ��õ ������ ������ ��������."
+    },
+    "docs": {
+      "title": "RustCost ����",
+      "description": "��ġ ���̵�, ��Ű��ó, RustCost ��ǰ ������ Ȯ���ϼ���."
+    },
+    "download": {
+      "title": "RustCost �ٿ�ε�",
+      "description": "RustCost �ھ�� ��ú��� Helm ��Ʈ �� Docker �̹����� �޾ƺ�����."
+    },
+    "community": {
+      "title": "RustCost Ŀ�´�Ƽ",
+      "description": "RustCost Ŀ�´�Ƽ�� �����Ͽ� �ǰ��� ������ ������Ʈ�� �⿩�ϼ���."
+    },
+    "support": {
+      "title": "RustCost �Ŀ���",
+      "description": "RustCost ���� FinOps ���°踦 �Ŀ��ϴ� ��Ʈ�ʿ� ����� �Ұ��մϴ�."
+    },
+    "blog": {
+      "title": "RustCost ���α�",
+      "description": "RustCost ���� �ֽ� �ҽİ� �����Ͼ ���丮�� ����������.",
+      "postTitle": "RustCost ���α� �� {{title}}",
+      "postDescription": "��{{title}}�� �۷� RustCost ���� �λ���Ʈ�� Ȯ���ϼ���."
+    }
   }
 }

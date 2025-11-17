@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import BrandLogo from "@/shared/components/BrandLogo";
 import CommonCard from "@/shared/components/CommonCard";
+import PageSEO from "@/shared/components/PageSEO";
 import { buildLanguagePrefix } from "@/constants/language";
 import type { LanguageCode } from "@/types/i18n";
 
@@ -81,6 +82,12 @@ export default function LandingPage() {
 
   return (
     <div className="relative">
+      <PageSEO
+        titleKey="seo.landing.title"
+        titleDefault="RustCost · Quiet but Sufficient FinOps Observability"
+        descriptionKey="seo.landing.description"
+        descriptionDefault="Discover RustCost, a lightweight Kubernetes cost analysis tool offering actionable FinOps insights."
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[calc(100vh-134px)] flex items-center mb-8">
         {/* Adjusted overlay: darker neutral gradient for light mode */}

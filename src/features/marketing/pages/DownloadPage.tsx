@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchDockerHubDashboardTags } from "@/lib/api";
 import Badge from "@/shared/components/Badge";
+import PageSEO from "@/shared/components/PageSEO";
 import { buildLanguagePrefix } from "@/constants/language";
 import {
   CORE_IMAGE_NAME,
@@ -85,6 +86,12 @@ export default function DownloadPage() {
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-10 md:py-14">
+      <PageSEO
+        titleKey="seo.download.title"
+        titleDefault="Download RustCost"
+        descriptionKey="seo.download.description"
+        descriptionDefault="Get Helm charts or Docker images for RustCost core and dashboard components."
+      />
       {/* Hero */}
       <header className="mb-8 text-center">
         <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">

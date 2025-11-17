@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { SUPPORT_APPLY_URL, SUPPORTERS } from "@/constants/support";
 import type { Supporter } from "@/types/support";
+import PageSEO from "@/shared/components/PageSEO";
 
 function SupporterCard({ supporter }: { supporter: Supporter }) {
   return (
@@ -41,6 +42,12 @@ export default function SupportPage() {
   const { t } = useTranslation();
   return (
     <div className="container mx-auto px-4 md:px-6 py-10 md:py-14">
+      <PageSEO
+        titleKey="seo.support.title"
+        titleDefault="RustCost Supporters"
+        descriptionKey="seo.support.description"
+        descriptionDefault="Partners and companies supporting the RustCost project."
+      />
       <header className="mb-8 text-center">
         <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
           {t("support.title", { defaultValue: "Support" })}
