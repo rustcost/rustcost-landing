@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeToggle from "@/shared/components/ThemeToggle";
 import BrandLogo from "@/shared/components/BrandLogo";
-import LangSelect from "@/shared/components/LangSelect";
+import LangSelect from "@/app/layouts/components/LangSelect";
 import {
   buildLanguagePrefix,
   normalizeLanguageCode,
@@ -106,11 +106,8 @@ export default function Navbar() {
           <div className="px-4 pt-4 border-t border-gray-100 dark:border-gray-800">
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <LangSelect
-                value={activeLanguage}
-                onChange={handleLangChange}
-                variant="mobile"
-              />
+              {/* Language Toggle */}
+              <LangSelect value={activeLanguage} onChange={handleLangChange} />
             </div>
           </div>
 
