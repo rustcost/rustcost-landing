@@ -15,7 +15,7 @@ type CommonSelectProps = {
   icon?: React.ReactNode;
 };
 
-const BASE_STYLES = {
+const BASE_SELECT_STYLES = {
   container: "relative inline-flex items-center",
   trigger:
     "inline-flex items-center gap-1 pl-7 pr-6 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200",
@@ -35,7 +35,6 @@ export default function CommonSelect({
   icon,
 }: CommonSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const styles = BASE_STYLES;
 
   const selected = options.find((opt) => opt.value === value) ?? options[0];
 
@@ -47,24 +46,24 @@ export default function CommonSelect({
   };
 
   return (
-    <div className={twMerge(styles.container, className)}>
-      {icon && <div className={styles.iconWrapper}>{icon}</div>}
+    <div className={twMerge(BASE_SELECT_STYLES.container, className)}>
+      {icon && <div className={BASE_SELECT_STYLES.iconWrapper}>{icon}</div>}
 
       <button
         type="button"
         aria-label={ariaLabel}
         onClick={toggle}
-        className={styles.trigger}
+        className={BASE_SELECT_STYLES.trigger}
       >
         {selected.label}
       </button>
 
       {isOpen && (
-        <div className={styles.panel}>
+        <div className={BASE_SELECT_STYLES.panel}>
           {options.map((opt) => (
             <div
               key={opt.value}
-              className={styles.option}
+              className={BASE_SELECT_STYLES.option}
               onClick={() => handleSelect(opt.value)}
             >
               {opt.label}

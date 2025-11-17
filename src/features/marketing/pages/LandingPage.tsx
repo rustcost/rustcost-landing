@@ -10,7 +10,7 @@ import {
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import BrandLogo from "@/shared/components/BrandLogo";
-import Card from "@/shared/components/Card";
+import CommonCard from "@/shared/components/CommonCard";
 import { buildLanguagePrefix } from "@/constants/language";
 import type { LanguageCode } from "@/types/i18n";
 
@@ -143,7 +143,7 @@ export default function LandingPage() {
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featureCards.map(({ Icon, title, desc }) => (
-            <Card
+            <CommonCard
               key={String(title)}
               icon={Icon}
               title={title}
@@ -161,7 +161,7 @@ export default function LandingPage() {
           })}
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
-          <Card
+          <CommonCard
             title={t("landing.costing.showback.title", {
               defaultValue: "Showback",
             })}
@@ -180,8 +180,8 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
-          </Card>
-          <Card
+          </CommonCard>
+          <CommonCard
             title={t("landing.costing.chargeback.title", {
               defaultValue: "Chargeback",
             })}
@@ -200,7 +200,7 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
-          </Card>
+          </CommonCard>
         </div>
       </section>
 
@@ -219,7 +219,7 @@ export default function LandingPage() {
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {philosophyItems.map((item) => (
-            <Card key={item} title={item} titleClassName={"text-base"} />
+            <CommonCard key={item} title={item} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
@@ -264,7 +264,7 @@ export default function LandingPage() {
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 dark:text-gray-300">
           {whyRustCostItems.map((text) => (
-            <Card key={text} title={text} titleClassName={"text-base"} />
+            <CommonCard key={text} title={text} titleClassName={"text-base"} />
           ))}
         </div>
       </section>
