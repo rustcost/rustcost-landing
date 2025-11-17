@@ -45,18 +45,12 @@
       "showback": {
         "title": "비용 가시화 (Showback)",
         "desc": "팀 또는 서비스의 리소스 사용량을 투명하게 보여 주어 실질적인 비용 인식을 높입니다.",
-        "items": [
-          "클러스터 / 팀별 사용량 분석",
-          "비용 추세에 대한 직관 제공"
-        ]
+        "items": ["클러스터 / 팀별 사용량 분석", "비용 추세에 대한 직관 제공"]
       },
       "chargeback": {
         "title": "비용 배분 (Chargeback)",
         "desc": "정확한 비용을 팀 또는 서비스에 배분하여 책임성과 더 나은 의사결정을 돕습니다.",
-        "items": [
-          "정확하고 효율적인 비용 배분",
-          "기존 스택과의 호환성 유지"
-        ]
+        "items": ["정확하고 효율적인 비용 배분", "기존 스택과의 호환성 유지"]
       }
     },
     "philosophy": {
@@ -136,33 +130,39 @@
   },
   "seo": {
     "siteName": "RustCost",
-    "defaultTitle": "RustCost �� ������Ƽ���� ���� �淮 FinOps",
-    "defaultDescription": "RustCost�� ������Ƽ�� ����� �����ϰ� ����ȭ�ϵ��� ���� ���� FinOps ������ �����Դϴ�.",
+    "defaultTitle": "RustCost · 가벼운 Kubernetes FinOps 플랫폼",
+    "defaultDescription": "RustCost는 플랫폼, DevOps, 인프라 팀이 최소한의 오버헤드로 Kubernetes 클라우드 비용을 분석·관리·최적화할 수 있도록 돕는 고성능 오픈 FinOps 관측 스택입니다.",
+
     "landing": {
-      "title": "RustCost �� ���������� ����� FinOps ������",
-      "description": "������ RustCost�� ������Ƽ�� ����� �����ϰ� �м��ϰ� ��õ ������ ������ ��������."
+      "title": "RustCost · 조용하고 효율적이며 정확한 Kubernetes FinOps 관측",
+      "description": "RustCost는 빠르고 가벼운 Kubernetes 비용 분석 도구로, 기존 비용 플랫폼의 무거운 부담 없이 정확하고 실행 가능한 FinOps 인사이트를 제공합니다."
     },
+
     "docs": {
-      "title": "RustCost ����",
-      "description": "��ġ ���̵�, ��Ű��ó, RustCost ��ǰ ������ Ȯ���ϼ���."
+      "title": "RustCost 문서",
+      "description": "RustCost를 Kubernetes 환경에서 설치·확장·통합하기 위한 설치 가이드, 아키텍처 참고자료, 운영 문서를 제공합니다."
     },
+
     "download": {
-      "title": "RustCost �ٿ�ε�",
-      "description": "RustCost �ھ�� ��ú��� Helm ��Ʈ �� Docker �̹����� �޾ƺ�����."
+      "title": "RustCost 다운로드",
+      "description": "RustCost의 코어 엔진과 대시보드를 빠르게 클러스터에 적용할 수 있도록 Helm 차트와 Docker 이미지를 제공합니다."
     },
+
     "community": {
-      "title": "RustCost Ŀ�´�Ƽ",
-      "description": "RustCost Ŀ�´�Ƽ�� �����Ͽ� �ǰ��� ������ ������Ʈ�� �⿩�ϼ���."
+      "title": "RustCost 커뮤니티",
+      "description": "RustCost 커뮤니티에 참여하세요 — 유지관리자와 협업하고, 기능을 제안하고, FinOps 경험을 공유하며 오픈소스 생태계에 기여할 수 있습니다."
     },
+
     "support": {
-      "title": "RustCost �Ŀ���",
-      "description": "RustCost ���� FinOps ���°踦 �Ŀ��ϴ� ��Ʈ�ʿ� ����� �Ұ��մϴ�."
+      "title": "RustCost 서포터",
+      "description": "Kubernetes 비용 투명성을 위한 RustCost와 오픈소스 FinOps 생태계를 발전시키는 기관, 기여자, 파트너들을 소개합니다."
     },
+
     "blog": {
-      "title": "RustCost ���α�",
-      "description": "RustCost ���� �ֽ� �ҽİ� �����Ͼ ���丮�� ����������.",
-      "postTitle": "RustCost ���α� �� {{title}}",
-      "postDescription": "��{{title}}�� �۷� RustCost ���� �λ���Ʈ�� Ȯ���ϼ���."
+      "title": "RustCost 블로그",
+      "description": "RustCost 팀이 전하는 엔지니어링 인사이트, FinOps 베스트 프랙티스, Kubernetes 비용 최적화 가이드 및 최신 소식을 확인하세요.",
+      "postTitle": "RustCost 블로그 · {{title}}",
+      "postDescription": "“{{title}}” 읽기 — RustCost 엔지니어링 팀이 전하는 Kubernetes 및 FinOps에 대한 심층 인사이트."
     }
   }
 }
