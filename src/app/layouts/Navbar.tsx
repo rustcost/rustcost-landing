@@ -1,10 +1,10 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeToggle from "@/shared/components/ThemeToggle";
 import BrandLogo from "@/shared/components/BrandLogo";
-import LangSelect from "@/shared/components/LangSelect";
+import LangSelect from "@/app/layouts/components/LangSelect";
 import {
   buildLanguagePrefix,
   normalizeLanguageCode,
@@ -17,6 +17,8 @@ export default function Navbar() {
   const { t } = useTranslation();
   type LanguageParams = { ["lng"]?: LanguageCode };
   const params = useParams<LanguageParams>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const activeLanguage = normalizeLanguageCode(params["lng"]);
   const prefix = buildLanguagePrefix(activeLanguage);
   const [open, setOpen] = useState(false);
@@ -28,8 +30,9 @@ export default function Navbar() {
     segment ? `${prefix}/${segment}` : `${prefix}/`;
 
   const handleLangChange = (newLang: LanguageCode) => {
-    const nextPath = replaceLanguageInPath(window.location.pathname, newLang);
-    window.location.pathname = nextPath;
+    const nextPath = replaceLanguageInPath(location.pathname, newLang);
+    const fullPath = `${nextPath}${location.search ?? ""}${location.hash ?? ""}`;
+    navigate(fullPath, { replace: true });
   };
 
   useEffect(() => {
@@ -87,52 +90,54 @@ export default function Navbar() {
       {/* Mobile full-screen menu */}
       {open && (
         <div className="fixed inset-0 z-[60] bg-white dark:bg-gray-950">
-          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <BrandLogo className="h-12 w-12 rounded-full" />
-              <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                RustCost
-              </span>
-            </div>
-            <button
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-            >
-              <XMarkIcon className="h-7 w-7" />
-            </button>
-          </div>
-
-          <div className="px-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-            <div className="flex items-center gap-3">
-              <ThemeToggle />
-              <LangSelect
-                value={activeLanguage}
-                onChange={handleLangChange}
-                variant="mobile"
-              />
-            </div>
-          </div>
-
-          <nav className="mt-6 flex flex-col items-stretch gap-2 px-4">
-            {NAVIGATION_LINKS.map((link) => (
-              <NavLink
-                key={`mobile-${link.key}`}
-                to={buildLinkPath(link.segment)}
-                end={link.exact}
+          <div className="min-h-screen bg-white dark:bg-gray-950">
+            <div className="container mx-auto px-4 py-3 flex items-center justify-between ">
+              <div className="flex items-center gap-3">
+                <BrandLogo className="h-12 w-12 rounded-full" />
+                <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                  RustCost
+                </span>
+              </div>
+              <button
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
+                aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  `w-full rounded-xl px-5 py-4 text-2xl font-bold transition-colors ${
-                    isActive
-                      ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm"
-                      : "text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/80"
-                  }`
-                }
               >
-                {t(link.i18nKey)}
-              </NavLink>
-            ))}
-          </nav>
+                <XMarkIcon className="h-7 w-7" />
+              </button>
+            </div>
+
+            <div className="px-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                {/* Language Toggle */}
+                <LangSelect
+                  value={activeLanguage}
+                  onChange={handleLangChange}
+                />
+              </div>
+            </div>
+
+            <nav className="mt-6 flex flex-col items-stretch gap-2 px-4">
+              {NAVIGATION_LINKS.map((link) => (
+                <NavLink
+                  key={`mobile-${link.key}`}
+                  to={buildLinkPath(link.segment)}
+                  end={link.exact}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    `w-full rounded-xl px-5 py-4 text-2xl font-bold transition-colors ${
+                      isActive
+                        ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm"
+                        : "text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/80"
+                    }`
+                  }
+                >
+                  {t(link.i18nKey)}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
         </div>
       )}
     </header>

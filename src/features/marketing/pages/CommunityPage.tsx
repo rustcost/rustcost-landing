@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { LanguageCode } from "@/types/i18n";
 import { buildLanguagePrefix } from "@/constants/language";
+import PageSEO from "@/shared/components/PageSEO";
 
 export default function CommunityPage() {
   const { t } = useTranslation();
@@ -26,6 +27,12 @@ export default function CommunityPage() {
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-10 md:py-14">
+      <PageSEO
+        titleKey="seo.community.title"
+        titleDefault="RustCost Community"
+        descriptionKey="seo.community.description"
+        descriptionDefault="Join discussions, share ideas, and help shape RustCost."
+      />
       <header className="mb-8 text-center">
         <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
           {t("community.title", { defaultValue: "Community" })}

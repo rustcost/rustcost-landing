@@ -1,4 +1,5 @@
 import { useColorScheme } from "@/shared/hooks/useColorScheme";
+import { twMerge } from "tailwind-merge";
 
 type BrandLogoProps = {
   className?: string;
@@ -11,8 +12,12 @@ const LOGO_FOR_SCHEME: Record<"light" | "dark", string> = {
   dark: "/logo-white.webp",
 };
 
+const BASE_LOGO_STYLES = {
+  img: "h-12 w-12",
+};
+
 export default function BrandLogo({
-  className = "h-12 w-12",
+  className,
   alt = "RustCost logo",
   title = "RustCost",
 }: BrandLogoProps) {
@@ -24,7 +29,7 @@ export default function BrandLogo({
       src={src}
       alt={alt}
       title={title}
-      className={className}
+      className={twMerge(BASE_LOGO_STYLES.img, className)}
       loading="lazy"
     />
   );

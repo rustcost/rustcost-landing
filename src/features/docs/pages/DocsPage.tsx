@@ -11,6 +11,7 @@ import {
   normalizeLanguageCode,
 } from "@/constants/language";
 import type { LanguageCode } from "@/types/i18n";
+import PageSEO from "@/shared/components/PageSEO";
 
 type TocItem = { id: string; text: string; level: number };
 
@@ -269,6 +270,12 @@ export default function DocsPage() {
 
   return (
     <div className="relative">
+      <PageSEO
+        titleKey="seo.docs.title"
+        titleDefault="RustCost Documentation"
+        descriptionKey="seo.docs.description"
+        descriptionDefault="Install guides, architecture notes, and docs for RustCost."
+      />
       {/* Mobile drawer trigger */}
       <div className="mb-4 flex items-center justify-between lg:hidden">
         <button
