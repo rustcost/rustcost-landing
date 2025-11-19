@@ -46,7 +46,10 @@ function normalizeMd(raw: string): string {
   return out.join("\n");
 }
 
-const docFiles = import.meta.glob("../content/*/*.md", { as: "raw" });
+const docFiles = import.meta.glob("../content/*/*.md", {
+  query: "?raw",
+  import: "default",
+});
 
 type DocCacheValue = {
   normalized: string;
