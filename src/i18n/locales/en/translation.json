@@ -134,32 +134,32 @@
   "seo": {
     "siteName": "RustCost",
     "defaultTitle": "RustCost · Lightweight FinOps for Kubernetes",
-    "defaultDescription": "RustCost is an open FinOps observability stack that helps platform teams understand and optimize Kubernetes cloud spend.",
+    "defaultDescription": "RustCost is an open, high-performance FinOps observability stack that enables platform, DevOps, and infrastructure teams to analyze, control, and optimize Kubernetes cloud costs with minimal overhead.",
     "landing": {
-      "title": "RustCost · Quiet but Sufficient FinOps Observability",
-      "description": "Discover RustCost, a lightweight Kubernetes cost analysis tool that delivers actionable FinOps insights without heavy overhead."
+      "title": "RustCost · Quiet, Efficient, and Accurate Kubernetes FinOps Observability",
+      "description": "RustCost is a fast, lightweight Kubernetes cost analysis tool that delivers precise, actionable FinOps insights without the heavy footprint of traditional cost platforms."
     },
     "docs": {
       "title": "RustCost Documentation",
-      "description": "Install guides, architecture notes, and product documentation for RustCost."
+      "description": "Comprehensive installation guides, architecture references, and operational documentation for deploying, scaling, and integrating RustCost in Kubernetes environments."
     },
     "download": {
       "title": "Download RustCost",
-      "description": "Get Helm charts or Docker images for the RustCost core and dashboard."
+      "description": "Access Helm charts and Docker images for RustCost’s core engine and dashboard to rapidly enable Kubernetes cost visibility in your cluster."
     },
     "community": {
       "title": "RustCost Community",
-      "description": "Join discussions, share feedback, and contribute to RustCost."
+      "description": "Join the RustCost community — collaborate with maintainers, request features, share FinOps practices, and contribute to the open-source ecosystem."
     },
     "support": {
       "title": "RustCost Supporters",
-      "description": "Partners and companies supporting the RustCost open FinOps ecosystem."
+      "description": "Organizations, contributors, and partners helping advance RustCost and the open-source FinOps ecosystem for Kubernetes cost transparency."
     },
     "blog": {
       "title": "RustCost Blog",
-      "description": "Latest news and engineering stories from the RustCost team.",
+      "description": "Engineering insights, FinOps best practices, Kubernetes cost-optimization guides, and updates from the RustCost team.",
       "postTitle": "RustCost Blog · {{title}}",
-      "postDescription": "Read “{{title}}” — insights from the RustCost engineering team."
+      "postDescription": "Read “{{title}}” — in-depth Kubernetes and FinOps insights from the RustCost engineering team."
     }
   }
 }
