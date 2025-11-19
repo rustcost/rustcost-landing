@@ -11,4 +11,3 @@ export const SUPPORTERS: Supporter[] = [
     darkSrc: "/images/company/cloudbro-dark.png",
   },
 ];
-
