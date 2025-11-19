@@ -23,6 +23,7 @@ export default function LandingPage() {
 
   const featureCards = [
     {
+      id: "analytics",
       Icon: ArrowTrendingUpIcon,
       title: t("landing.features.analytics.title", {
         defaultValue: "Kubernetes Cost Analysis",
@@ -33,6 +34,7 @@ export default function LandingPage() {
       }),
     },
     {
+      id: "lightweight",
       Icon: SparklesIcon,
       title: t("landing.features.lightweight.title", {
         defaultValue: "Lightweight Rust Architecture",
@@ -43,6 +45,7 @@ export default function LandingPage() {
       }),
     },
     {
+      id: "collector",
       Icon: CpuChipIcon,
       title: t("landing.features.collector.title", {
         defaultValue: "Efficient Collection Algorithm",
@@ -53,6 +56,7 @@ export default function LandingPage() {
       }),
     },
     {
+      id: "neutrality",
       Icon: GlobeAltIcon,
       title: t("landing.features.neutrality.title", {
         defaultValue: "Vendor Neutral",
@@ -80,8 +84,46 @@ export default function LandingPage() {
     returnObjects: true,
   }) as string[];
 
+  const sectionHeadingIds = {
+    hero: "landing-hero-heading",
+    features: "landing-features-heading",
+    costing: "landing-costing-heading",
+    philosophy: "landing-philosophy-heading",
+    architecture: "landing-architecture-heading",
+    why: "landing-why-heading",
+    roadmap: "landing-roadmap-heading",
+    cta: "landing-cta-heading",
+  } as const;
+
+  const ctaDescriptionIds = {
+    heroDocs: "landing-hero-docs-desc",
+    heroGithub: "landing-hero-github-desc",
+    footerDocs: "landing-footer-docs-desc",
+    footerGithub: "landing-footer-github-desc",
+  } as const;
+
+  const heroActionsLabel = t("landing.hero.primaryActionsLabel", {
+    defaultValue: "Primary landing actions",
+  });
+  const footerActionsLabel = t("landing.cta.primaryActionsLabel", {
+    defaultValue: "Footer call-to-action links",
+  });
+  const docsHelpText = t("landing.cta.docsHint", {
+    defaultValue: "Opens the RustCost documentation in this tab.",
+  });
+  const githubHelpText = t("landing.cta.githubHint", {
+    defaultValue: "Opens the RustCost GitHub repository in a new tab.",
+  });
+
   return (
-    <div className="relative">
+    <main
+      id="landing-main"
+      className="relative"
+      tabIndex={-1}
+      aria-label={t("landing.main.landmarkLabel", {
+        defaultValue: "RustCost marketing landing content",
+      })}
+    >
       <PageSEO
         titleKey="seo.landing.title"
         titleDefault="RustCost · Quiet but Sufficient FinOps Observability"
@@ -89,7 +131,11 @@ export default function LandingPage() {
         descriptionDefault="Discover RustCost, a lightweight Kubernetes cost analysis tool offering actionable FinOps insights."
       />
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[calc(100vh-134px)] flex items-center mb-8">
+      <section
+        className="relative overflow-hidden min-h-[calc(100vh-134px)] flex items-center mb-8"
+        aria-labelledby={sectionHeadingIds.hero}
+        tabIndex={-1}
+      >
         {/* Adjusted overlay: darker neutral gradient for light mode */}
         <div className="pointer-events-none absolute inset-0 " />
         <div className="container mx-auto px-4 md:px-6 py-16 md:py-1 relative z-10">
@@ -98,7 +144,10 @@ export default function LandingPage() {
             <div className="mb-6 flex flex-col items-center justify-center gap-5">
               <BrandLogo className="h-28 w-28 md:h-40 md:w-40 rounded-full shadow" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+            <h1
+              id={sectionHeadingIds.hero}
+              className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white"
+            >
               {t("landing.hero.title", {
                 defaultValue: "Quiet but Sufficient FinOps Observability",
               })}
@@ -109,10 +158,15 @@ export default function LandingPage() {
                   "A lightweight, transparent way to understand and improve Kubernetes costs — not another heavy FinOps platform.",
               })}
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <nav
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+              aria-label={heroActionsLabel}
+            >
               <a
                 href={`${prefix}/${"docs"}`}
                 className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-white shadow hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                tabIndex={0}
+                aria-describedby={ctaDescriptionIds.heroDocs}
               >
                 {t("landing.cta.getStarted", { defaultValue: "Get Started" })}
                 <ArrowRightIcon className="h-5 w-5" />
@@ -122,12 +176,20 @@ export default function LandingPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-6 py-3 text-gray-800 hover:bg-gray-50 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
+                tabIndex={0}
+                aria-describedby={ctaDescriptionIds.heroGithub}
               >
                 {t("landing.cta.viewOnGitHub", {
                   defaultValue: "View on GitHub",
                 })}
               </a>
-            </div>
+            </nav>
+            <p id={ctaDescriptionIds.heroDocs} className="sr-only">
+              {docsHelpText}
+            </p>
+            <p id={ctaDescriptionIds.heroGithub} className="sr-only">
+              {githubHelpText}
+            </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-gray-600 dark:text-gray-400">
               <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
                 ⚙️ Rust + React
@@ -144,31 +206,51 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
-        <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+      <section
+        className="container mx-auto px-4 md:px-6 py-10 md:py-14"
+        aria-labelledby={sectionHeadingIds.features}
+        tabIndex={-1}
+      >
+        <h2
+          id={sectionHeadingIds.features}
+          className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white"
+        >
           {t("landing.features.title", { defaultValue: "Features" })}
         </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-          {featureCards.map(({ Icon, title, desc }) => (
+        <div
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2"
+          role="list"
+        >
+          {featureCards.map(({ Icon, title, desc, id }) => (
             <CommonCard
-              key={String(title)}
+              key={id}
               icon={Icon}
               title={title}
               description={desc}
+              role="listitem"
+              titleId={`${sectionHeadingIds.features}-${id}`}
             />
           ))}
         </div>
       </section>
 
       {/* Costing Section : Showback & Chargeback */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
-        <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+      <section
+        className="container mx-auto px-4 md:px-6 py-10 md:py-14"
+        aria-labelledby={sectionHeadingIds.costing}
+        tabIndex={-1}
+      >
+        <h2
+          id={sectionHeadingIds.costing}
+          className="mb-8 text-center text-3xl font-extrabold text-gray-900 dark:text-white"
+        >
           {t("landing.costing.title", {
             defaultValue: "Costing",
           })}
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
           <CommonCard
+            titleId={`${sectionHeadingIds.costing}-showback`}
             title={t("landing.costing.showback.title", {
               defaultValue: "Showback",
             })}
@@ -189,6 +271,7 @@ export default function LandingPage() {
             </ul>
           </CommonCard>
           <CommonCard
+            titleId={`${sectionHeadingIds.costing}-chargeback`}
             title={t("landing.costing.chargeback.title", {
               defaultValue: "Chargeback",
             })}
@@ -212,8 +295,15 @@ export default function LandingPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
+      <section
+        className="container mx-auto px-4 md:px-6 py-10 md:py-14"
+        aria-labelledby={sectionHeadingIds.philosophy}
+        tabIndex={-1}
+      >
+        <h2
+          id={sectionHeadingIds.philosophy}
+          className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white"
+        >
           {t("landing.philosophy.title", {
             defaultValue: "Philosophy",
           })}
@@ -231,19 +321,34 @@ export default function LandingPage() {
               </span>
             ))}
         </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          role="list"
+        >
           {philosophyItems.map((item) => (
-            <CommonCard key={item} title={item} titleClassName={"text-base"} />
+            <CommonCard
+              key={item}
+              title={item}
+              titleClassName={"text-base"}
+              role="listitem"
+            />
           ))}
         </div>
       </section>
 
       {/* Architecture Section */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
+      <section
+        className="container mx-auto px-4 md:px-6 py-10 md:py-14"
+        aria-labelledby={sectionHeadingIds.architecture}
+        tabIndex={-1}
+      >
         <div className="rounded-2xl bg-linear-to-br from-gray-50 to-white p-6 shadow-sm ring-1 ring-gray-200 dark:from-gray-900 dark:to-gray-950 dark:ring-gray-800">
           <div className="flex items-center gap-2">
             <RocketLaunchIcon className="h-6 w-6 text-amber-500" />
-            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
+            <h2
+              id={sectionHeadingIds.architecture}
+              className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white"
+            >
               {t("landing.architecture.title", {
                 defaultValue: "Architecture & Scalability",
               })}
@@ -264,8 +369,15 @@ export default function LandingPage() {
       </section>
 
       {/* whyRustCost */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
+      <section
+        className="container mx-auto px-4 md:px-6 py-10 md:py-14"
+        aria-labelledby={sectionHeadingIds.why}
+        tabIndex={-1}
+      >
+        <h2
+          id={sectionHeadingIds.why}
+          className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white"
+        >
           {t("landing.whyRustCost.title", {
             defaultValue: "Why RustCost",
           })}
@@ -276,21 +388,36 @@ export default function LandingPage() {
               "Beyond monitoring — toward understanding. Build intuition about your cluster’s cost structure.",
           })}
         </p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 dark:text-gray-300">
+        <div
+          className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 dark:text-gray-300"
+          role="list"
+        >
           {whyRustCostItems.map((text) => (
-            <CommonCard key={text} title={text} titleClassName={"text-base"} />
+            <CommonCard
+              key={text}
+              title={text}
+              titleClassName={"text-base"}
+              role="listitem"
+            />
           ))}
         </div>
       </section>
 
       {/* Roadmap Section */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-14">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
+      <section
+        className="container mx-auto px-4 md:px-6 py-10 md:py-14"
+        aria-labelledby={sectionHeadingIds.roadmap}
+        tabIndex={-1}
+      >
+        <h2
+          id={sectionHeadingIds.roadmap}
+          className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white"
+        >
           {t("landing.roadmap.title", {
             defaultValue: "Roadmap",
           })}
         </h2>
-        <div className="mt-4 flex flex-wrap gap-2 text-sm">
+        <ul className="mt-4 flex flex-wrap gap-2 text-sm" role="list">
           {[
             "GPU cost analysis",
             "Network/Volume costs",
@@ -299,21 +426,28 @@ export default function LandingPage() {
             "Helm‑based multi‑cluster",
             "CNCF collaboration",
           ].map((chip) => (
-            <span
+            <li
               key={chip}
               className="rounded-full border border-gray-300 px-3 py-1 text-gray-700 dark:border-gray-700 dark:text-gray-200"
             >
               {chip}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 md:px-6 pb-16 md:pb-24">
+      <section
+        className="container mx-auto px-4 md:px-6 pb-16 md:pb-24"
+        aria-labelledby={sectionHeadingIds.cta}
+        tabIndex={-1}
+      >
         <div className="flex flex-col mx-auto max-w-4xl rounded-2xl justify-center bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white gap-3">
           <div className="flex flex-col items-center justify-center gap-2">
-            <h3 className="text-2xl font-extrabold">
+            <h3
+              id={sectionHeadingIds.cta}
+              className="text-2xl font-extrabold"
+            >
               {t("landing.cta.headline", {
                 defaultValue: "Understand and improve your costs",
               })}
@@ -325,10 +459,15 @@ export default function LandingPage() {
               })}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+          <nav
+            className="flex flex-col sm:flex-row items-center justify-center gap-2"
+            aria-label={footerActionsLabel}
+          >
             <a
               href={`${prefix}/${"docs"}`}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-gray-900 shadow hover:bg-gray-100 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
+              tabIndex={0}
+              aria-describedby={ctaDescriptionIds.footerDocs}
             >
               <span className="leading-tight">
                 {t("landing.cta.getStarted", { defaultValue: "Get Started" })}
@@ -340,14 +479,22 @@ export default function LandingPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-4 py-2 text-white hover:bg-white/10 dark:border-white/30 dark:hover:bg-white/10"
+              tabIndex={0}
+              aria-describedby={ctaDescriptionIds.footerGithub}
             >
               <span className="leading-tight">
                 {t("landing.cta.star", { defaultValue: "Star on GitHub" })}
               </span>
             </a>
-          </div>
+          </nav>
+          <p id={ctaDescriptionIds.footerDocs} className="sr-only">
+            {docsHelpText}
+          </p>
+          <p id={ctaDescriptionIds.footerGithub} className="sr-only">
+            {githubHelpText}
+          </p>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

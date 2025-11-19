@@ -458,8 +458,11 @@ export default function DocsPage() {
           <ul className="space-y-1">
             {toc
               .filter((i) => i.level <= 3)
-              .map((i) => (
-                <li key={i.id} className={i.level > 2 ? "ml-3" : ""}>
+              .map((i, idx) => (
+                <li
+                  key={`${i.id}-${idx}`}
+                  className={i.level > 2 ? "ml-3" : ""}
+                >
                   <a
                     href={`#${i.id}`}
                     onClick={(e) => {
