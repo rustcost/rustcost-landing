@@ -1,10 +1,13 @@
-import type { ElementType, ReactNode } from "react";
+import { useId, type AriaRole, type ElementType, type ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 type IconComponent = ElementType<{ className?: string }>;
 
 export interface CardProps {
+  id?: string;
   title: ReactNode;
+  titleId?: string;
+  descriptionId?: string;
   description?: ReactNode;
   icon?: IconComponent;
   className?: string;
@@ -13,6 +16,11 @@ export interface CardProps {
   iconWrapperClassName?: string;
   iconClassName?: string;
   children?: ReactNode;
+  tabIndex?: number;
+  role?: AriaRole;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+  ariaDescribedBy?: string;
 }
 
 const BASE_CARD_STYLES = {
@@ -25,6 +33,7 @@ const BASE_CARD_STYLES = {
 };
 
 export default function CommonCard({
+  id,
   title,
   description,
   icon: Icon,
@@ -34,9 +43,31 @@ export default function CommonCard({
   iconWrapperClassName,
   iconClassName,
   children,
+  tabIndex,
+  role,
+  titleId,
+  descriptionId,
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
 }: CardProps) {
+  const autoTitleId = useId();
+  const autoDescriptionId = useId();
+  const headingId = titleId ?? `${autoTitleId}-title`;
+  const paragraphId = description
+    ? descriptionId ?? `${autoDescriptionId}-description`
+    : undefined;
+
   return (
-    <div className={twMerge(BASE_CARD_STYLES.card, className)}>
+    <article
+      id={id}
+      className={twMerge(BASE_CARD_STYLES.card, className)}
+      tabIndex={tabIndex}
+      role={role}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabel ? undefined : ariaLabelledBy ?? headingId}
+      aria-describedby={ariaDescribedBy ?? paragraphId}
+    >
       {Icon ? (
         <div
           className={twMerge(
@@ -48,12 +79,16 @@ export default function CommonCard({
         </div>
       ) : null}
 
-      <h3 className={twMerge(BASE_CARD_STYLES.title, titleClassName)}>
+      <h3
+        id={headingId}
+        className={twMerge(BASE_CARD_STYLES.title, titleClassName)}
+      >
         {title}
       </h3>
 
       {description ? (
         <p
+          id={paragraphId}
           className={twMerge(
             BASE_CARD_STYLES.description,
             descriptionClassName
@@ -64,6 +99,6 @@ export default function CommonCard({
       ) : null}
 
       {children}
-    </div>
+    </article>
   );
 }

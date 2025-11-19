@@ -290,7 +290,7 @@ export default function DocsPage() {
       {/* Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)_220px] gap-6">
         {/* Sidebar */}
-        <aside className="hidden lg:block sticky self-start top-24 h-[calc(100vh-7rem)] overflow-y-auto pr-2">
+        <aside className="hidden lg:block sticky self-start top-24 h-[calc(100vh-7rem)] overflow-y-auto pr-2 select-none">
           <nav className="space-y-2">
             {topics.map((t) => (
               <Link
@@ -426,11 +426,11 @@ export default function DocsPage() {
               idx >= 0 && idx < topics.length - 1 ? topics[idx + 1] : null;
             if (!prev && !next) return null;
             return (
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 not-prose">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 not-prose select-none">
                 {prev && (
                   <Link
                     to={buildDocPath(prev.slug)}
-                    className="group rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
+                    className="group rounded-lg border border-gray-200 px-4 py-3 w-fit text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
                   >
                     {"< "}
                     {prev.title}
@@ -439,7 +439,7 @@ export default function DocsPage() {
                 {next && (
                   <Link
                     to={buildDocPath(next.slug)}
-                    className="group justify-self-end rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
+                    className="group justify-self-end rounded-lg border border-gray-200 px-4 py-3 w-fit text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
                   >
                     {next.title}
                     {" >"}
@@ -451,15 +451,18 @@ export default function DocsPage() {
         </article>
 
         {/* TOC */}
-        <aside className="hidden lg:block sticky self-start top-24 h-[calc(100vh-7rem)] overflow-y-auto pl-2">
+        <aside className="hidden lg:block sticky self-start top-24 h-[calc(100vh-7rem)] overflow-y-auto pl-2 select-none">
           <div className="text-xs uppercase tracking-wide text-gray-500 mb-3">
             On this page
           </div>
           <ul className="space-y-1">
             {toc
               .filter((i) => i.level <= 3)
-              .map((i) => (
-                <li key={i.id} className={i.level > 2 ? "ml-3" : ""}>
+              .map((i, idx) => (
+                <li
+                  key={`${i.id}-${idx}`}
+                  className={i.level > 2 ? "ml-3" : ""}
+                >
                   <a
                     href={`#${i.id}`}
                     onClick={(e) => {

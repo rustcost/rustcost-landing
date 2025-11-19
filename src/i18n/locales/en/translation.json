@@ -58,7 +58,7 @@
     },
     "philosophy": {
       "title": "Philosophy",
-      "desc": "RustCost balances three principles to stay useful and unobtrusive — like a fly that lands quietly: it helps without burdening the system.",
+      "desc": "RustCost balances three principles to stay useful and unobtrusive\n- like a fly that lands quietly: it helps without burdening the system.",
       "items": [
         "Accuracy — neither excessive nor lax",
         "Sustainability — minimal load on systems",
