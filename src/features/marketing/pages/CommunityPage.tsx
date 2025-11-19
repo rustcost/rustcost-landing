@@ -61,7 +61,7 @@ export default function CommunityPage() {
           </p>
           <a
             href={`${prefix}/docs/contributing`}
-            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-800 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-800 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800 select-none"
           >
             {t("community.contribute.cta", {
               defaultValue: "Open Contribution Guide",

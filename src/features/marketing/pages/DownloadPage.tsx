@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchDockerHubDashboardTags } from "@/lib/api";
 import Badge from "@/shared/components/Badge";
 import PageSEO from "@/shared/components/PageSEO";
+import CopyButton from "@/shared/components/CopyButton";
 import { buildLanguagePrefix } from "@/constants/language";
 import {
   CORE_IMAGE_NAME,
@@ -15,30 +16,12 @@ import {
 import type { VersionInfo } from "@/types/download";
 import type { LanguageCode } from "@/types/i18n";
 
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(text);
-          setCopied(true);
-          setTimeout(() => setCopied(false), 1200);
-        } catch {
-          // ignore
-        }
-      }}
-      className="rounded-md border border-gray-300 bg-white/80 px-2 py-1 text-xs text-gray-700 hover:bg-white dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200"
-    >
-      {copied ? "Copied" : "Copy"}
-    </button>
-  );
-}
-
 export default function DownloadPage() {
   type LanguageParams = { ["lng"]?: LanguageCode };
   const params = useParams<LanguageParams>();
   const prefix = buildLanguagePrefix(params["lng"]);
+  const docsInstallHref = `${prefix}/${"docs"}/${"install"}`;
+
   const [tab, setTab] = useState<"helm" | "docker">("helm");
   const [coreVersions, setCoreVersions] = useState<VersionInfo[]>([]);
   const [dashboardVersions, setDashboardVersions] = useState<VersionInfo[]>([]);
@@ -56,7 +39,7 @@ export default function DownloadPage() {
             tags.map((tag) => ({
               version: tag.name,
               date: tag.last_updated.slice(0, 10),
-              notes: `${repo}/releases/tag/${tag.name}`,
+              notes: `${repo}/releases/tag/v${tag.name}`,
             }));
 
           setCoreVersions(mapVersions(CORE_REPOSITORY_URL));
@@ -82,8 +65,6 @@ export default function DownloadPage() {
     return [];
   };
 
-  const docsInstallHref = `${prefix}/${"docs"}/${"install"}`;
-
   return (
     <div className="container mx-auto px-4 md:px-6 py-10 md:py-14">
       <PageSEO
@@ -92,6 +73,7 @@ export default function DownloadPage() {
         descriptionKey="seo.download.description"
         descriptionDefault="Get Helm charts or Docker images for RustCost core and dashboard components."
       />
+
       {/* Hero */}
       <header className="mb-8 text-center">
         <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
@@ -103,11 +85,11 @@ export default function DownloadPage() {
       </header>
 
       {/* Tabs */}
-      <div className="mx-auto max-w-3xl rounded-xl border border-gray-200 bg-white p-2 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <div className="mx-auto max-w-3xl lg:max-w-4xl rounded-xl border border-gray-200 bg-white p-2 shadow-sm dark:border-gray-800 dark:bg-gray-900">
         <div className="flex gap-2">
           <button
             onClick={() => setTab("helm")}
-            className={`flex-1 rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+            className={`flex-1 rounded-lg px-4 py-2 text-sm font-semibold transition-colors select-none ${
               tab === "helm"
                 ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/70"
@@ -117,7 +99,7 @@ export default function DownloadPage() {
           </button>
           <button
             onClick={() => setTab("docker")}
-            className={`flex-1 rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+            className={`flex-1 rounded-lg px-4 py-2 text-sm font-semibold transition-colors select-none ${
               tab === "docker"
                 ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/70"
@@ -161,7 +143,7 @@ export default function DownloadPage() {
                 href={docsInstallHref}
                 className="text-blue-600 underline dark:text-amber-400"
               >
-                Docs – Install
+                Installation Docs
               </a>
             </div>
           </div>

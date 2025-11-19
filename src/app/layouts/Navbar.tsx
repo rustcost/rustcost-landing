@@ -31,7 +31,9 @@ export default function Navbar() {
 
   const handleLangChange = (newLang: LanguageCode) => {
     const nextPath = replaceLanguageInPath(location.pathname, newLang);
-    const fullPath = `${nextPath}${location.search ?? ""}${location.hash ?? ""}`;
+    const fullPath = `${nextPath}${location.search ?? ""}${
+      location.hash ?? ""
+    }`;
     navigate(fullPath, { replace: true });
   };
 
@@ -46,7 +48,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-50/90 dark:bg-gray-900/80 backdrop-blur shadow-md">
+    <header className="sticky top-0 z-50 bg-gray-50/90 dark:bg-gray-900/80 backdrop-blur shadow-md select-none">
       <div className="max-w-7xl w-full mx-auto flex justify-between items-center px-4 lg:px-6 py-3">
         {/* Brand */}
         <div className="flex items-center gap-3">

@@ -159,7 +159,7 @@ export default function LandingPage() {
               })}
             </p>
             <nav
-              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 select-none"
               aria-label={heroActionsLabel}
             >
               <a
@@ -172,7 +172,7 @@ export default function LandingPage() {
                 <ArrowRightIcon className="h-5 w-5" />
               </a>
               <a
-                href="https://github.com/rustcost/rustcost"
+                href="https://github.com/rustcost"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-6 py-3 text-gray-800 hover:bg-gray-50 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
@@ -217,10 +217,7 @@ export default function LandingPage() {
         >
           {t("landing.features.title", { defaultValue: "Features" })}
         </h2>
-        <div
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2"
-          role="list"
-        >
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2" role="list">
           {featureCards.map(({ Icon, title, desc, id }) => (
             <CommonCard
               key={id}
@@ -444,10 +441,7 @@ export default function LandingPage() {
       >
         <div className="flex flex-col mx-auto max-w-4xl rounded-2xl justify-center bg-gray-900 p-6 text-white shadow-md dark:bg-gray-800 dark:text-white gap-3">
           <div className="flex flex-col items-center justify-center gap-2">
-            <h3
-              id={sectionHeadingIds.cta}
-              className="text-2xl font-extrabold"
-            >
+            <h3 id={sectionHeadingIds.cta} className="text-2xl font-extrabold">
               {t("landing.cta.headline", {
                 defaultValue: "Understand and improve your costs",
               })}
@@ -460,7 +454,7 @@ export default function LandingPage() {
             </p>
           </div>
           <nav
-            className="flex flex-col sm:flex-row items-center justify-center gap-2"
+            className="flex flex-col sm:flex-row items-center justify-center gap-2 select-none"
             aria-label={footerActionsLabel}
           >
             <a
@@ -475,7 +469,7 @@ export default function LandingPage() {
               <ArrowRightIcon className="h-5 w-5" />
             </a>
             <a
-              href="https://github.com/rustcost/rustcost"
+              href="https://github.com/rustcost"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-4 py-2 text-white hover:bg-white/10 dark:border-white/30 dark:hover:bg-white/10"
