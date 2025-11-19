@@ -218,11 +218,18 @@ export default function LandingPage() {
             defaultValue: "Philosophy",
           })}
         </h2>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
           {t("landing.philosophy.desc", {
             defaultValue:
-              "RustCost balances three principles to stay useful and unobtrusive — like a fly that lands quietly: it helps without burdening the system.",
-          })}
+              "RustCost balances three principles to stay useful and unobtrusive\n- like a fly that lands quietly: it helps without burdening the system.",
+          })
+            .split("\n")
+            .map((line, i) => (
+              <span key={i}>
+                {line}
+                <br />
+              </span>
+            ))}
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {philosophyItems.map((item) => (
@@ -243,7 +250,7 @@ export default function LandingPage() {
             </h2>
           </div>
           <p className="mt-2 text-gray-600 dark:text-gray-300">
-            {t("landing.philosophy.desc", {
+            {t("landing.architecture.desc", {
               defaultValue:
                 "File‑based TSDB, no external DB. Kubernetes‑native integration. Rust backend (Axum) + React UI.",
             })}
