@@ -33,7 +33,7 @@ export default function DownloadPage() {
       try {
         const payload = await fetchDockerHubDashboardTags();
         if (isMounted) {
-          const tags = payload.results;
+          const tags = Array.isArray(payload?.results) ? payload.results : [];
 
           const mapVersions = (repo: string) =>
             tags.map((tag) => ({
