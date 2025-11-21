@@ -59,7 +59,7 @@ export default function DownloadPage() {
       }
     };
 
-    void loadTags();
+    // void loadTags();
 
     return () => {
       isMounted = false;
