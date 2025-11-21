@@ -33,8 +33,15 @@ export default function DownloadPage() {
       try {
         const payload = await fetchDockerHubDashboardTags();
         if (isMounted) {
-          const tags = payload.results;
+          let tags = Array.isArray(payload?.results) ? payload.results : [];
 
+          // Filter out pre-release tags (e.g., dev, prototype)
+          tags = tags.filter((tag) => {
+            const name = tag.name.toLowerCase();
+            return !name.includes("dev") && !name.includes("prototype");
+          });
+
+          // Map to VersionInfo
           const mapVersions = (repo: string) =>
             tags.map((tag) => ({
               version: tag.name,
