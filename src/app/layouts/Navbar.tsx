@@ -12,6 +12,7 @@ import {
 } from "@/constants/language";
 import { NAVIGATION_LINKS } from "@/constants/routes";
 import type { LanguageCode } from "@/types/i18n";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -52,10 +53,12 @@ export default function Navbar() {
       <div className="max-w-7xl w-full mx-auto flex justify-between items-center px-4 lg:px-6 py-3">
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <BrandLogo className="h-12 w-12 rounded-full shadow-sm" />
-          <span className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
-            RustCost
-          </span>
+          <Link to={buildLinkPath("")} className="inline-flex items-center">
+            <BrandLogo className="h-12 w-12 rounded-full shadow-sm" />
+            <span className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
+              RustCost
+            </span>
+          </Link>
         </div>
 
         {/* Desktop nav */}
@@ -95,10 +98,15 @@ export default function Navbar() {
           <div className="min-h-screen bg-white dark:bg-gray-950">
             <div className="container mx-auto px-4 py-3 flex items-center justify-between ">
               <div className="flex items-center gap-3">
-                <BrandLogo className="h-12 w-12 rounded-full" />
-                <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                  RustCost
-                </span>
+                <Link
+                  to={buildLinkPath("")}
+                  className="inline-flex items-center"
+                >
+                  <BrandLogo className="h-12 w-12 rounded-full" />
+                  <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                    RustCost
+                  </span>
+                </Link>
               </div>
               <button
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
