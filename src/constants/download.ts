@@ -2,7 +2,7 @@ import type { DownloadProduct } from "@/types/download";
 
 export const HELM_INSTALL_COMMAND = `helm repo add rustcost https://rustcost.github.io/rustcost-helmchart/
 helm repo update
-helm upgrade --install rustcost rustcost/rustcost-core -n rustcost --create-namespace`;
+helm upgrade --install rustcost rustcost/rustcost -n rustcost --create-namespace --version 1.0.0-dev.14`;
 
 export const CORE_IMAGE_NAME = "kimc1992/rustcost-core";
 export const DASHBOARD_IMAGE_NAME = "kimc1992/rustcost-dashboard";
