@@ -59,7 +59,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex gap-4 lg:gap-6 text-gray-700 dark:text-gray-300">
+        <nav className="hidden lg:flex gap-2 xl:gap-6 text-gray-700 dark:text-gray-300">
           {NAVIGATION_LINKS.map((link) => (
             <NavLink
               key={`desktop-${link.key}`}
